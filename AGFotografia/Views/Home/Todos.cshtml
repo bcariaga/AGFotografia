@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Albunes";
+    List<AGFotografia.Models.Album> albunes = ViewBag.Albunes;
+}
+<div class="right-content">
+    <h2>Albunes</h2>
+    @foreach (AGFotografia.Models.Album album in albunes)
+    {
+        <div class="col-md-4">
+            <a href="../Portfolio/ModificarAlbum?id=@album.ID">
+                <img src="@album.Portada" class="hvr-bob" width="400" height="350"/><br />
+                <span style="color:white;font-size:12px;">@album.Titulo</span>
+                <hr />
+            </a>
+        </div>
+    }
+</div>

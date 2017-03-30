@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Portadas";
+}
+
+
+<div class="right-content">
+    <div class="col-md-3">
+        <h2>Portadas</h2>
+        
+            @foreach (AGFotografia.Models.Portada portada in ViewBag.Portadas)
+            {
+                if (portada.ID == 1)
+                {
+                    <form method="post">
+                        <input type="hidden" value="@portada.ID" name="IdPortada1" readonly />
+                        <label for="textoPortada1">Texto Portada:</label>
+                        <input type="text" value="@portada.Texto" id="textoPortada1" name="textoPortada1" />
+                        <label for="srcPortada1">SRC de la Portada:</label>
+                        <input type="text" value="@portada.SRC" id="srcPortada1" name="SRC1" />
+                        <button class="btn btn-info" formaction="@Url.Action("EditarPortada1","Home")">Editar</button>
+                    </form>
+                    <br />
+                }
+                if (portada.ID == 2)
+                {
+                    <form method="post">
+                        <input type="hidden" value="@portada.ID" name="IdPortada2" readonly />
+                        <label for="textoPortada1">Texto Portada:</label>
+                        <input type="text" value="@portada.Texto" id="textoPortada2" name="textoPortada2" />
+                        <label for="srcPortada1">SRC de la Portada:</label>
+                        <input type="text" value="@portada.SRC" id="srcPortada2" name="SRC2" />
+                        <button class="btn btn-info" formaction="@Url.Action("EditarPortada2","Home")">Editar</button>
+                    </form>
+                <br />
+                }
+                if (portada.ID == 3)
+                {
+                    <form method="post">
+                        <input type="hidden" value="@portada.ID" name="IdPortada3" readonly />
+                        <label for="textoPortada1">Texto Portada:</label>
+                        <input type="text" value="@portada.Texto" id="textoPortada3" name="textoPortada3" />
+                        <label for="srcPortada1">SRC de la Portada:</label>
+                        <input type="text" value="@portada.SRC" id="srcPortada1" name="SRC3" />
+                        <button class="btn btn-info" formaction="@Url.Action("EditarPortada3","Home")">Editar</button>
+                    </form>
+
+                <br />
+                }
+            }
+
+
+
+    </div>
+</div>
+
+

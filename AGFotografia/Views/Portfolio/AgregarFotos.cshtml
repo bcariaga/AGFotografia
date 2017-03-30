@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Agregar Fotos";
+ 
+}
+<div class="right-content">
+    <h2>Agregar fotos al Album</h2>
+    <form method="post">
+        <input type="hidden" name="ID" value="@ViewBag.Album.ID" />
+        <label for="titulo">Titulo:</label>
+        <input id="titulo" type="text" name="titulo" value="@ViewBag.Album.Titulo" />
+        <label for="tags">Tags:</label>
+        <input id="tags" type="text" name="tags" value="@ViewBag.Album.Tags" />
+        <label for="portada">Foto de portada:</label>
+        <input id="portada" type="text" name="portada" value="@ViewBag.Album.Portada" />
+
+        <br />
+        <label for="fotos">Fotos:</label>
+        <a id="agregarCampo" class="btn btn-sm btn-info" href="#"> Agregar   <spam class="glyphicon glyphicon-plus"></spam></a>
+        <div id="fotos">
+            <div class="well">
+                <div id="contenedor">
+                    <div class="added">
+                        <input type="text" placeholder="SRC foto 1" name="srcFotos" id="campo_1" /><a href="#" class="eliminar btn btn-sm btn-danger">
+                            Borrar
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <button formaction="@Url.Action("EditarFotos","Portfolio")" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>   OK!</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,95 @@
+.red.white .main-navi > div.active div:first-child,
+.red.white .main-navi > div.active, 
+.red.white .main-navi a.active
+.red .tags-contents a.active,
+.red .blog-navi a:hover:before,
+.red .filter > a.active,
+.red .flex-direction-nav .flex-next:hover,
+.red .flex-direction-nav .flex-prev:hover,
+.red .details-close:hover,
+.red .button-close:hover,
+.red .blog-info a:before,
+.red input[type="submit"]:hover,
+.red .service-details .dots:before,
+.red .service-details .dots:after,
+.red .service-details .dots,
+.red .portfolio.horizontal li:hover a,
+.red .masonry-wrapper .item span.class,
+.red .portfolio-image li span.class,
+.red .right-images li span.class,
+.red .portfolio.column li span.class,
+.red .button-down,
+.red .home-page.flexslider .slides > li:before,
+.red .main-navi > div:hover .dot,
+.red .main-navi a:hover .dot,
+.red .main-navi > div.active div:first-child,
+.red .main-navi a.active:hover,
+.red .main-navi a.active{
+	background: #ff3333;
+}
+.red .masonry-wrapper .item em:before, 
+.red .right-images li em:before, 
+.red .portfolio.column li em:before,
+.red.white .soc-icons a:hover,
+.red .service-details .glyph,
+.red .blog-mini a:hover,
+.red .blog-navi a:hover,
+.red .search .glyph:hover,
+.red .skill .amount,
+.red .twitter-block .name,
+.red .twitter-block .glyph,
+.red .comments .reply:hover,
+.red .comments .user-name:hover,
+.red .var2.soc-icons a:hover,
+.red .show-more:hover,
+.red .blog-info .glyph,
+.red .blog-info a:hover,
+.red .blog-details a:hover,
+.red .member-details .soc-icons a:hover,
+.red .member-block:hover h2,
+.red .info-block em,
+.red textarea:focus,
+.red input[type="text"]:focus,
+.red input[type="text"].error,
+.red .soc-icons a:hover,
+.red .logo em:before{
+	color: #ff3333;
+}
+
+.red .main-navi > div.active .corner,
+.red .main-navi a.active .corner{
+	border-left-color: #ff3333;
+}
+.red .masonry-wrapper .item em:after,
+.red .right-images li em:after,
+.red .portfolio.column li em:after{
+	border-right-color: #ff3333;
+}
+.red .tags-contents a.active,
+.red .features-contents a:before,
+.red .skill .line,
+.red .filter > a.active,
+.red .show-more:hover,
+.red textarea:focus,
+.red input[type="text"]:focus,
+.red input[type="text"].error,
+.red .service .button:hover,
+.red .masonry-wrapper .item:hover > span,
+.red .right-images li:hover > span,
+.red .portfolio.column ul li:hover > span,
+.red .masonry-wrapper .item.unactive > span,
+.red .portfolio.column ul li.unactive > span,
+.red .masonry-wrapper .item > span,
+.red .right-images li > span,
+.red .portfolio.column li > span,
+.red .circle:before{
+	border-color: #ff3333;
+}
+.red .flex-control-paging li a:hover,
+.red .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #ff3333 inset;
+}
+.white.red .flex-control-paging li a:hover, 
+.white.red .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #ff3333 inset;
+}

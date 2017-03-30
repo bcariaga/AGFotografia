@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<!--  Contacto  -->
+<div class="right-content" style="opacity: 1;">
+    <div class="about main-block">
+        <div class="left-content col-lg-9 baron" data-baron-v="inited">
+            <div class="scroller" style="width: 1230px;">
+                <!--  CONTENT IMAGE  -->
+                <img src="~/Content/img/C4.jpg" width="1230" height="500" />
+                <!--  //CONTENT IMAGE  -->
+                <article class="left-content-text">
+                    <h2>Contacto</h2>
+                    <strong>You can contact me</strong>
+                    <div class="row contact-details">
+                        <div class="contact-info col-lg-6 col-md-6 col-sm-6">
+                            <p>A popular Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                            <p class="mini">A popular Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</p>
+
+                            <div class="info-block">
+                                <em class="icono ion-android-phone-portrait"></em>
+                                <strong>Tel</strong>
+                                <span class="phone">1 (234) 567-890</span>
+                            </div>
+                            <div class="info-block">
+                                <em class="icono ion-email"></em>
+                                <strong>e-mail</strong>
+                                <span>mail@tumail.com menagermail@mail.com</span>
+                            </div>
+                            <div class="info-block">
+                                <em class="icono ion-location"></em>
+                                <strong>Direccion</strong>
+                                <span>San Francisco, CA 94107 fa795 Folsom Ave, Suite 600</span>
+                            </div>
+                            <div class="info-block">
+                                <em class="icono ion-social-skype"></em>
+                                <strong>skype</strong>
+                                <span>foto_hunter</span>
+                            </div>
+                            <div class="info-block">
+                                <em class="icono ion-social-facebook"></em>
+                                <strong>facebook</strong>
+                                <span>foto-hunter</span>
+                            </div>
+                        </div>
+                        <div class="form col-lg-6 col-md-6 col-sm-6">
+                            <form id="ajax-contact-form" action="javascript:void(0);">
+                                <input name="name" placeholder="Nombre" type="text">
+                                <input name="email" id="email" placeholder="e-mail" type="text">
+                                <input name="phone" id="phone" placeholder="Tel" type="text">
+                                <textarea name="message" placeholder="mensaje"></textarea>
+                                <input id="submit" value="enviar" type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="scroller__track">
+                <div class="scroller__bar" style="height: 646px; top: 67.8161px;"></div>
+            </div>
+        </div>
+        <!--  RIGHT IMAGES  -->
+        @* Hacer un for heach *@
+        <div class="right-images col-lg-3" data-baron-v="inited">
+            <div class="scroller" style="width: 410px;">
+                <ul>
+                    @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+                    {
+                        <li style="height: 307px; width: 410px;">
+                            <a href=""><img src="@album.Portada" alt=""></a>
+                            <span><em></em></span>
+                        </li>
+
+                    }
+
+                </ul>
+            </div>
+            @*<div class="scroller__track">
+                <div class="scroller__bar" style="height: 941px; top: 0px;"></div>
+            </div>*@
+        </div>
+        <!--  //RIGHT IMAGES  -->
+    </div>
+</div>

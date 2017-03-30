@@ -1,0 +1,95 @@
+.purple.white .main-navi > div.active div:first-child,
+.purple.white .main-navi > div.active, 
+.purple.white .main-navi a.active
+.purple .tags-contents a.active,
+.purple .blog-navi a:hover:before,
+.purple .filter > a.active,
+.purple .flex-direction-nav .flex-next:hover,
+.purple .flex-direction-nav .flex-prev:hover,
+.purple .details-close:hover,
+.purple .button-close:hover,
+.purple .blog-info a:before,
+.purple input[type="submit"]:hover,
+.purple .service-details .dots:before,
+.purple .service-details .dots:after,
+.purple .service-details .dots,
+.purple .portfolio.horizontal li:hover a,
+.purple .masonry-wrapper .item span.class,
+.purple .portfolio-image li span.class,
+.purple .right-images li span.class,
+.purple .portfolio.column li span.class,
+.purple .button-down,
+.purple .home-page.flexslider .slides > li:before,
+.purple .main-navi > div:hover .dot,
+.purple .main-navi a:hover .dot,
+.purple .main-navi > div.active div:first-child,
+.purple .main-navi a.active:hover,
+.purple .main-navi a.active{
+	background: #7c3bbd;
+}
+.purple .masonry-wrapper .item em:before, 
+.purple .right-images li em:before, 
+.purple .portfolio.column li em:before,
+.purple.white .soc-icons a:hover,
+.purple .service-details .glyph,
+.purple .blog-mini a:hover,
+.purple .blog-navi a:hover,
+.purple .search .glyph:hover,
+.purple .skill .amount,
+.purple .twitter-block .name,
+.purple .twitter-block .glyph,
+.purple .comments .reply:hover,
+.purple .comments .user-name:hover,
+.purple .var2.soc-icons a:hover,
+.purple .show-more:hover,
+.purple .blog-info .glyph,
+.purple .blog-info a:hover,
+.purple .blog-details a:hover,
+.purple .member-details .soc-icons a:hover,
+.purple .member-block:hover h2,
+.purple .info-block em,
+.purple textarea:focus,
+.purple input[type="text"]:focus,
+.purple input[type="text"].error,
+.purple .soc-icons a:hover,
+.purple .logo em:before{
+	color: #7c3bbd;
+}
+
+.purple .main-navi > div.active .corner,
+.purple .main-navi a.active .corner{
+	border-left-color: #7c3bbd;
+}
+.purple .masonry-wrapper .item em:after,
+.purple .right-images li em:after,
+.purple .portfolio.column li em:after{
+	border-right-color: #7c3bbd;
+}
+.purple .tags-contents a.active,
+.purple .features-contents a:before,
+.purple .skill .line,
+.purple .filter > a.active,
+.purple .show-more:hover,
+.purple textarea:focus,
+.purple input[type="text"]:focus,
+.purple input[type="text"].error,
+.purple .service .button:hover,
+.purple .masonry-wrapper .item:hover > span,
+.purple .right-images li:hover > span,
+.purple .portfolio.column ul li:hover > span,
+.purple .masonry-wrapper .item.unactive > span,
+.purple .portfolio.column ul li.unactive > span,
+.purple .masonry-wrapper .item > span,
+.purple .right-images li > span,
+.purple .portfolio.column li > span,
+.purple .circle:before{
+	border-color: #7c3bbd;
+}
+.purple .flex-control-paging li a:hover,
+.purple .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #7c3bbd inset;
+}
+.white.purple .flex-control-paging li a:hover, 
+.white.purple .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #7c3bbd inset;
+}

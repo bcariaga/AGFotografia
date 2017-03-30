@@ -1,0 +1,95 @@
+.lightred.white .main-navi > div.active div:first-child,
+.lightred.white .main-navi > div.active, 
+.lightred.white .main-navi a.active
+.lightred .tags-contents a.active,
+.lightred .blog-navi a:hover:before,
+.lightred .filter > a.active,
+.lightred .flex-direction-nav .flex-next:hover,
+.lightred .flex-direction-nav .flex-prev:hover,
+.lightred .details-close:hover,
+.lightred .button-close:hover,
+.lightred .blog-info a:before,
+.lightred input[type="submit"]:hover,
+.lightred .service-details .dots:before,
+.lightred .service-details .dots:after,
+.lightred .service-details .dots,
+.lightred .portfolio.horizontal li:hover a,
+.lightred .masonry-wrapper .item span.class,
+.lightred .portfolio-image li span.class,
+.lightred .right-images li span.class,
+.lightred .portfolio.column li span.class,
+.lightred .button-down,
+.lightred .home-page.flexslider .slides > li:before,
+.lightred .main-navi > div:hover .dot,
+.lightred .main-navi a:hover .dot,
+.lightred .main-navi > div.active div:first-child,
+.lightred .main-navi a.active:hover,
+.lightred .main-navi a.active{
+	background: #fd7647;
+}
+.lightred .masonry-wrapper .item em:before, 
+.lightred .right-images li em:before, 
+.lightred .portfolio.column li em:before,
+.lightred.white .soc-icons a:hover,
+.lightred .service-details .glyph,
+.lightred .blog-mini a:hover,
+.lightred .blog-navi a:hover,
+.lightred .search .glyph:hover,
+.lightred .skill .amount,
+.lightred .twitter-block .name,
+.lightred .twitter-block .glyph,
+.lightred .comments .reply:hover,
+.lightred .comments .user-name:hover,
+.lightred .var2.soc-icons a:hover,
+.lightred .show-more:hover,
+.lightred .blog-info .glyph,
+.lightred .blog-info a:hover,
+.lightred .blog-details a:hover,
+.lightred .member-details .soc-icons a:hover,
+.lightred .member-block:hover h2,
+.lightred .info-block em,
+.lightred textarea:focus,
+.lightred input[type="text"]:focus,
+.lightred input[type="text"].error,
+.lightred .soc-icons a:hover,
+.lightred .logo em:before{
+	color: #fd7647;
+}
+
+.lightred .main-navi > div.active .corner,
+.lightred .main-navi a.active .corner{
+	border-left-color: #fd7647;
+}
+.lightred .masonry-wrapper .item em:after,
+.lightred .right-images li em:after,
+.lightred .portfolio.column li em:after{
+	border-right-color: #fd7647;
+}
+.lightred .tags-contents a.active,
+.lightred .features-contents a:before,
+.lightred .skill .line,
+.lightred .filter > a.active,
+.lightred .show-more:hover,
+.lightred textarea:focus,
+.lightred input[type="text"]:focus,
+.lightred input[type="text"].error,
+.lightred .service .button:hover,
+.lightred .masonry-wrapper .item:hover > span,
+.lightred .right-images li:hover > span,
+.lightred .portfolio.column ul li:hover > span,
+.lightred .masonry-wrapper .item.unactive > span,
+.lightred .portfolio.column ul li.unactive > span,
+.lightred .masonry-wrapper .item > span,
+.lightred .right-images li > span,
+.lightred .portfolio.column li > span,
+.lightred .circle:before{
+	border-color: #fd7647;
+}
+.lightred .flex-control-paging li a:hover,
+.lightred .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #fd7647 inset;
+}
+.white.lightred .flex-control-paging li a:hover, 
+.white.lightred .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #fd7647 inset;
+}

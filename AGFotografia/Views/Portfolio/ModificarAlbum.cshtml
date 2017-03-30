@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Modificar Album";
+    AGFotografia.Models.Album album = ViewBag.Album;
+}
+
+<div class="right-content">
+    <a href="@Url.Action("Index","Home")" class="btn btn-info pull-right"><span class="glyphicon glyphicon-arrow-left"></span> Ya esta, sacame de aca!</a>
+    <h2>Editar Album</h2>
+
+    <form id="formulario">
+        <div class="container">
+
+            <input type="hidden" name="ID" value="@album.ID" />
+            <label for="titulo">Titulo:</label>
+            <input id="titulo" type="text" name="titulo" value="@album.Titulo" />
+            <label for="tags">Tags:</label>
+            <input id="tags" type="text" name="tags" value="@album.Tags" />
+            <label for="portadaFile"> Subir Portada (Flickr):</label>
+            <input type="file" name="portadaFile" id="portadaFile" accept="image/*" />
+
+            <label for="portada">Foto de portada:</label>
+            <input id="portada" type="text" name="portada" value="@album.Portada" />
+
+
+            <button formaction="@Url.Action("EditarAlbum","Portfolio")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+            <br />
+            <br />
+            <hr />
+
+            <br />
+            <br />
+            <label for="fotos">Fotos:</label>
+
+            <label for="FotoFile"> Subi las fotos con Flickr:</label>
+            <input type="file" multiple="multiple" name="fotoFile" id="fotoFile" accept="image/*" />
+            <span>O a la antigua:</span>
+            <a id="agregarCampo" class="btn btn-sm btn-info" href="#"> Agregar   <spam class="glyphicon glyphicon-plus"></spam></a>
+            <div id="fotos">
+                <div class="well">
+                    <div id="contenedor">
+                        <div class="added">
+                            <input type="text" placeholder="SRC foto 1" name="srcFotos" id="campo_1" /><a href="#" class="eliminar btn btn-sm btn-danger">
+                                Borrar
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @*<button formaction="@Url.Action("EditarFotos","Portfolio")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span>   Agregar fotos</button>*@
+                <button class="btn btn-success pull-right" id="editarAlbum"> Enviar   </button>
+
+            </div>
+            <br />
+            <hr />
+        </div>
+
+    </form>
+    <form method="post">
+        <h2 for="fotos">Fotos:</h2>
+        <br />
+        <div class="col-md-12">
+            @foreach (AGFotografia.Models.Foto foto in ViewBag.Fotos)
+            {
+
+                <div class="col-md-3 text-center">
+                    <img src="@foto.SRC" class="img-responsive" />
+                    <label for="@foto.ID">¿Borrar?</label>
+                    <input type="checkbox" name="borrar" value="@foto.ID" id="@foto.ID" />
+
+                </div>
+                   
+            }
+        </div>
+
+        <div class="container">
+            <button formaction="@Url.Action("BorrarFoto","Portfolio")" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span> Borrar seleccion</button>
+        </div>
+
+
+        <hr />
+    </form>
+</div>
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $('#editarAlbum').on('click', function () {
+                
+
+               
+                //var f = $(this);
+                var formData = new FormData(document.getElementById("formulario"));
+                debugger;
+
+                $.ajax({
+                    url: "@Url.Action("EditarAlbum", "Portfolio")",
+                    type: "post",
+                    data: formData,
+                }).done(function(res){
+                    console.log(res);
+                    alert('Listo!');
+
+                }).error(function (res) {
+                    console.log(res);
+                    alert('Error');
+                });
+
+                e.preventDefault();
+
+            });
+
+
+
+        });
+
+
+
+    </script>
+}

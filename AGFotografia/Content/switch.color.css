@@ -1,0 +1,110 @@
+.color-picker {
+	background: #f7f7f7;
+	height: auto;
+	position: fixed;
+	right: -160px;
+	top: 150px;
+	width: 160px;
+	z-index: 500;
+}
+	.color-picker div {
+		cursor: pointer;
+		float: left;
+		height: 30px;
+		margin: 5px;
+		width: 30px;
+
+	    -moz-transition: top 0.2s linear;
+		-webkit-transition: top 0.2s linear;
+		-o-transition: top 0.2s linear;
+		-ms-transition: top 0.2s linear;
+		transition: top 0.2s linear;
+	}
+	.color-picker .picker-btn {
+		background: url("../images/icons/picker-ico.png") no-repeat scroll 5px center #f7f7f7;
+		border: medium none;
+		cursor: pointer;
+		left: -45px;
+		padding: 5px;
+		position: absolute;
+		top: 45px;
+		width: 40px;
+		height: 40px;
+	}
+	.color-picker .pickerTitle {
+		background: #666;
+		border: medium none;
+		color: #fff;
+		cursor: auto;
+		float: none;
+		line-height: 30px;
+		margin: 0;
+		padding: 10px 5px;
+		text-align: center;
+		text-transform: uppercase;
+		width: 100%;
+		height: 50px;
+	}
+	.black .color-picker .pickerTitle {
+		background: #000;
+	}
+	.color-picker .pwrapper {
+		height: auto;
+		padding: 15px 20px 25px;
+		width: 160px;
+	}
+	.color-picker .pickersubTitle {
+		border-bottom: 1px solid #EDEDED;
+		border-top: 1px solid #EDEDED;
+		clear: both;
+		color: #7F7F7F;
+		cursor: auto;
+		float: none;
+		font-size: 12px;
+		height: auto;
+		margin: 0 5px;
+		padding: 10px 5px;
+		text-align: center;
+		text-transform: uppercase;
+		width: auto;
+	}
+	.color-picker div.nopick {
+		height: 0;
+		width: 0;
+	}
+	.color-picker .picker-pink {
+	    background: #bd2882;
+	}
+	.color-picker .picker-turquoise {
+	    background: #009dc0;
+	}
+	.color-picker .picker-yellow {
+	    background: #ff8a00;
+	}
+	.color-picker .picker-red {
+	    background: #fa3f20;
+	}
+	.color-picker .picker-green {
+	    background: #7ab014;
+	}
+	.color-picker .picker-purple {
+	    background: #7c3bbd;
+	}
+
+	.color-picker .picker-blue {
+	    background: #4f4bc4;
+	}
+	.color-picker .picker-lightgreen {
+	    background: #44b37e;
+	}
+	.color-picker .picker-lightred {
+	    background: #fd7647;
+	}
+
+	.color-picker .picker-black {
+	    background: #000;
+	}
+	.color-picker .picker-white {
+	    background: #fff;
+	    border: 1px solid #ccc;
+	}

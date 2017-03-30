@@ -1,0 +1,95 @@
+.blue.white .main-navi > div.active div:first-child,
+.blue.white .main-navi > div.active, 
+.blue.white .main-navi a.active
+.blue .tags-contents a.active,
+.blue .blog-navi a:hover:before,
+.blue .filter > a.active,
+.blue .flex-direction-nav .flex-next:hover,
+.blue .flex-direction-nav .flex-prev:hover,
+.blue .details-close:hover,
+.blue .button-close:hover,
+.blue .blog-info a:before,
+.blue input[type="submit"]:hover,
+.blue .service-details .dots:before,
+.blue .service-details .dots:after,
+.blue .service-details .dots,
+.blue .portfolio.horizontal li:hover a,
+.blue .masonry-wrapper .item span.class,
+.blue .portfolio-image li span.class,
+.blue .right-images li span.class,
+.blue .portfolio.column li span.class,
+.blue .button-down,
+.blue .home-page.flexslider .slides > li:before,
+.blue .main-navi > div:hover .dot,
+.blue .main-navi a:hover .dot,
+.blue .main-navi > div.active div:first-child,
+.blue .main-navi a.active:hover,
+.blue .main-navi a.active{
+	background: #4f4bc4;
+}
+.blue .masonry-wrapper .item em:before, 
+.blue .right-images li em:before, 
+.blue .portfolio.column li em:before,
+.blue.white .soc-icons a:hover,
+.blue .service-details .glyph,
+.blue .blog-mini a:hover,
+.blue .blog-navi a:hover,
+.blue .search .glyph:hover,
+.blue .skill .amount,
+.blue .twitter-block .name,
+.blue .twitter-block .glyph,
+.blue .comments .reply:hover,
+.blue .comments .user-name:hover,
+.blue .var2.soc-icons a:hover,
+.blue .show-more:hover,
+.blue .blog-info .glyph,
+.blue .blog-info a:hover,
+.blue .blog-details a:hover,
+.blue .member-details .soc-icons a:hover,
+.blue .member-block:hover h2,
+.blue .info-block em,
+.blue textarea:focus,
+.blue input[type="text"]:focus,
+.blue input[type="text"].error,
+.blue .soc-icons a:hover,
+.blue .logo em:before{
+	color: #4f4bc4;
+}
+
+.blue .main-navi > div.active .corner,
+.blue .main-navi a.active .corner{
+	border-left-color: #4f4bc4;
+}
+.blue .masonry-wrapper .item em:after,
+.blue .right-images li em:after,
+.blue .portfolio.column li em:after{
+	border-right-color: #4f4bc4;
+}
+.blue .tags-contents a.active,
+.blue .features-contents a:before,
+.blue .skill .line,
+.blue .filter > a.active,
+.blue .show-more:hover,
+.blue textarea:focus,
+.blue input[type="text"]:focus,
+.blue input[type="text"].error,
+.blue .service .button:hover,
+.blue .masonry-wrapper .item:hover > span,
+.blue .right-images li:hover > span,
+.blue .portfolio.column ul li:hover > span,
+.blue .masonry-wrapper .item.unactive > span,
+.blue .portfolio.column ul li.unactive > span,
+.blue .masonry-wrapper .item > span,
+.blue .right-images li > span,
+.blue .portfolio.column li > span,
+.blue .circle:before{
+	border-color: #4f4bc4;
+}
+.blue .flex-control-paging li a:hover,
+.blue .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #4f4bc4 inset;
+}
+.white.blue .flex-control-paging li a:hover, 
+.white.blue .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #4f4bc4 inset;
+}

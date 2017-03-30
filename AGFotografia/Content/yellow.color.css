@@ -1,0 +1,96 @@
+
+.yellow.white .main-navi > div.active div:first-child,
+.yellow.white .main-navi > div.active, 
+.yellow.white .main-navi a.active
+.yellow .tags-contents a.active,
+.yellow .blog-navi a:hover:before,
+.yellow .filter > a.active,
+.yellow .flex-direction-nav .flex-next:hover,
+.yellow .flex-direction-nav .flex-prev:hover,
+.yellow .details-close:hover,
+.yellow .button-close:hover,
+.yellow .blog-info a:before,
+.yellow input[type="submit"]:hover,
+.yellow .service-details .dots:before,
+.yellow .service-details .dots:after,
+.yellow .service-details .dots,
+.yellow .portfolio.horizontal li:hover a,
+.yellow .masonry-wrapper .item span.class,
+.yellow .portfolio-image li span.class,
+.yellow .right-images li span.class,
+.yellow .portfolio.column li span.class,
+.yellow .button-down,
+.yellow .home-page.flexslider .slides > li:before,
+.yellow .main-navi > div:hover .dot,
+.yellow .main-navi a:hover .dot,
+.yellow .main-navi > div.active div:first-child,
+.yellow .main-navi a.active:hover,
+.yellow .main-navi a.active{
+	background: #ff8a00;
+}
+.yellow .masonry-wrapper .item em:before, 
+.yellow .right-images li em:before, 
+.yellow .portfolio.column li em:before,
+.yellow.white .soc-icons a:hover,
+.yellow .service-details .glyph,
+.yellow .blog-mini a:hover,
+.yellow .blog-navi a:hover,
+.yellow .search .glyph:hover,
+.yellow .skill .amount,
+.yellow .twitter-block .name,
+.yellow .twitter-block .glyph,
+.yellow .comments .reply:hover,
+.yellow .comments .user-name:hover,
+.yellow .var2.soc-icons a:hover,
+.yellow .show-more:hover,
+.yellow .blog-info .glyph,
+.yellow .blog-info a:hover,
+.yellow .blog-details a:hover,
+.yellow .member-details .soc-icons a:hover,
+.yellow .member-block:hover h2,
+.yellow .info-block em,
+.yellow textarea:focus,
+.yellow input[type="text"]:focus,
+.yellow input[type="text"].error,
+.yellow .soc-icons a:hover,
+.yellow .logo em:before{
+	color: #ff8a00;
+}
+
+.yellow .main-navi > div.active .corner,
+.yellow .main-navi a.active .corner{
+	border-left-color: #ff8a00;
+}
+.yellow .masonry-wrapper .item em:after,
+.yellow .right-images li em:after,
+.yellow .portfolio.column li em:after{
+	border-right-color: #ff8a00;
+}
+.yellow .tags-contents a.active,
+.yellow .features-contents a:before,
+.yellow .skill .line,
+.yellow .filter > a.active,
+.yellow .show-more:hover,
+.yellow textarea:focus,
+.yellow input[type="text"]:focus,
+.yellow input[type="text"].error,
+.yellow .service .button:hover,
+.yellow .masonry-wrapper .item:hover > span,
+.yellow .right-images li:hover > span,
+.yellow .portfolio.column ul li:hover > span,
+.yellow .masonry-wrapper .item.unactive > span,
+.yellow .portfolio.column ul li.unactive > span,
+.yellow .masonry-wrapper .item > span,
+.yellow .right-images li > span,
+.yellow .portfolio.column li > span,
+.yellow .circle:before{
+	border-color: #ff8a00;
+}
+.yellow .flex-control-paging li a:hover,
+.yellow .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #ff8a00 inset;
+}
+.white.yellow .flex-control-paging li a:hover, 
+.white.yellow .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #ff8a00 inset;
+}

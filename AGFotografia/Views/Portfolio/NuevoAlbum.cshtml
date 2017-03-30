@@ -1,0 +1,85 @@
+﻿@using AGFotografia.Models;
+@{
+    
+    ViewBag.Title = "Nuevo Album";
+
+}
+@model  Album
+
+
+<div class="right-content">
+    <div id="div_carga" style="display:none">
+        <img id="cargador" src="~/Content/img/loading.gif"/> Subiendo! 
+    </div>
+
+    <div class="container" id="addForm"></div>
+        <h2>Nuevo Album</h2>    
+       
+        
+    <br />
+    <br />
+    
+    
+
+    <form action="/Portfolio/InsertarAlbumNew" method="post" enctype = "multipart/form-data">
+
+        <label for="portadaFile"> Subir Portada:</label>
+        <input type="file" name="portadaFile" id="portadaFile" accept="image/*" />
+
+
+        <label for="FotoFile"> Subi las fotos con Flickr:</label>
+        <input type="file" multiple="multiple" name="fotoFile" id="fotoFile" accept="image/*" />
+
+        <input type="text" name="titulo" />
+        <input type="text" name="tags"/>
+        
+        <input type="submit"/>
+    </form>
+</div>
+
+
+@section scripts{
+    
+<script>
+    $(document).ready(function() {
+        var MaxInputs = 100; //Número Maximo de Campos
+        var contenedor = $("#formAdd"); //ID del contenedor
+        var AddButton = $("#agregarCampo"); //ID del Botón Agregar
+
+        //var x = número de campos existentes en el contenedor
+        var x = $("#contenedor div").length + 1;
+        var FieldCount = x - 1; //para el seguimiento de los campos
+
+        $(AddButton).click(function (e) {
+            if (x <= MaxInputs) //max input box allowed
+            {
+                FieldCount++;
+                //agregar campo
+                $(contenedor).append('<div><input type="text" name="srcFotos" id="campo_' + FieldCount + '" placeholder="SRC Foto ' + FieldCount + '"/><a href="#" class="eliminar btn btn-sm btn-danger"> Borrar <span class="glyphicon glyphicon-remove"></span></a></div>');
+                x++; //text box increment
+            }
+            return false;
+        });
+
+        $("body").on("click", ".eliminar", function (e) { //click en eliminar campo
+            if (x > 1) {
+                $(this).parent('div').remove(); //eliminar el campo
+                x--;
+            }
+            return false;
+        });
+
+       
+    
+
+    });
+    function onBegin() {
+
+        $('#enviar').hide();
+    }
+
+    function onComplete(r) {
+        console.log(r);
+    }
+</script>
+}

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="right-content">
+  
+
+    @if (Session["usuario"] != null)
+    {    <div class="col-sm-3">
+        <h2>Crear Usuario</h2>
+        <form method="post" action="@Url.Action("CrearUser","Usuario")">
+            <input class="form-group" type="text" placeholder="User" name="usuario" />
+            <input class="form-group" type="password" placeholder="Pass" name="password1" />
+            <input class="form-group" type="password" placeholder="Pass" name="password2" />
+            <input class="form-group" type="submit" />
+        </form>
+    </div>
+    }
+    else
+    {  <div class="col-sm-3">
+        <h2>Ingresar</h2>
+        <form method="post" action="@Url.Action("Login", "Usuario")">
+            <input class="contacto" type="text" placeholder="User" name="usuario" />
+            <input class="contacto" type="password" placeholder="Pass" name="password" />
+            <input class="form-group" type="submit" />
+        </form>
+    </div>
+
+    }
+
+
+</div>

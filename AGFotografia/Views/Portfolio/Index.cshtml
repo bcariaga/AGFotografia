@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Portfolio";
+}
+<div class="right-content" style="opacity: 1;">
+    <div id="threeColumn" class="portfolio column main-block">
+        <div class="scroller">
+            <ul class="animate posi">
+                @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+                {
+                    <li class="albunes-respon">
+                        <a href="../Portfolio/Ver?id=@album.ID" style="background-image: url(@album.Portada);"></a>
+                        <div>
+                            <span class="title">@album.Titulo</span>
+                            <span class="class">@album.Tags</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>

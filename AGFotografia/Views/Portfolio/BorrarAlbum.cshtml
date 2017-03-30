@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Borrar Album";
+}
+<div class="right-content">
+    <h2>Borrar Álbumes</h2>
+    @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+    {
+        <div class="panel-info">
+            <div class="panel-heading">
+                <h4>Titulo: @album.Titulo</h4>
+                <h5>Tags: @album.Tags</h5>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@album.ID">Borrar</button>
+            </div>
+            <div id="@album.ID" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <span class="text-center">¿Estas segura?</span>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger" href="../Portfolio/Borrar?id=@album.ID">SI, gil!</a>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">NOP</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+

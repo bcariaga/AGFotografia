@@ -1,0 +1,95 @@
+.turquoise.white .main-navi > div.active div:first-child,
+.turquoise.white .main-navi > div.active, 
+.turquoise.white .main-navi a.active
+.turquoise .tags-contents a.active,
+.turquoise .blog-navi a:hover:before,
+.turquoise .filter > a.active,
+.turquoise .flex-direction-nav .flex-next:hover,
+.turquoise .flex-direction-nav .flex-prev:hover,
+.turquoise .details-close:hover,
+.turquoise .button-close:hover,
+.turquoise .blog-info a:before,
+.turquoise input[type="submit"]:hover,
+.turquoise .service-details .dots:before,
+.turquoise .service-details .dots:after,
+.turquoise .service-details .dots,
+.turquoise .portfolio.horizontal li:hover a,
+.turquoise .masonry-wrapper .item span.class,
+.turquoise .portfolio-image li span.class,
+.turquoise .right-images li span.class,
+.turquoise .portfolio.column li span.class,
+.turquoise .button-down,
+.turquoise .home-page.flexslider .slides > li:before,
+.turquoise .main-navi > div:hover .dot,
+.turquoise .main-navi a:hover .dot,
+.turquoise .main-navi > div.active div:first-child,
+.turquoise .main-navi a.active:hover,
+.turquoise .main-navi a.active{
+	background: #009dc0;
+}
+.turquoise .masonry-wrapper .item em:before, 
+.turquoise .right-images li em:before, 
+.turquoise .portfolio.column li em:before,
+.turquoise.white .soc-icons a:hover,
+.turquoise .service-details .glyph,
+.turquoise .blog-mini a:hover,
+.turquoise .blog-navi a:hover,
+.turquoise .search .glyph:hover,
+.turquoise .skill .amount,
+.turquoise .twitter-block .name,
+.turquoise .twitter-block .glyph,
+.turquoise .comments .reply:hover,
+.turquoise .comments .user-name:hover,
+.turquoise .var2.soc-icons a:hover,
+.turquoise .show-more:hover,
+.turquoise .blog-info .glyph,
+.turquoise .blog-info a:hover,
+.turquoise .blog-details a:hover,
+.turquoise .member-details .soc-icons a:hover,
+.turquoise .member-block:hover h2,
+.turquoise .info-block em,
+.turquoise textarea:focus,
+.turquoise input[type="text"]:focus,
+.turquoise input[type="text"].error,
+.turquoise .soc-icons a:hover,
+.turquoise .logo em:before{
+	color: #009dc0;
+}
+
+.turquoise .main-navi > div.active .corner,
+.turquoise .main-navi a.active .corner{
+	border-left-color: #009dc0;
+}
+.turquoise .masonry-wrapper .item em:after,
+.turquoise .right-images li em:after,
+.turquoise .portfolio.column li em:after{
+	border-right-color: #009dc0;
+}
+.turquoise .tags-contents a.active,
+.turquoise .features-contents a:before,
+.turquoise .skill .line,
+.turquoise .filter > a.active,
+.turquoise .show-more:hover,
+.turquoise textarea:focus,
+.turquoise input[type="text"]:focus,
+.turquoise input[type="text"].error,
+.turquoise .service .button:hover,
+.turquoise .masonry-wrapper .item:hover > span,
+.turquoise .right-images li:hover > span,
+.turquoise .portfolio.column ul li:hover > span,
+.turquoise .masonry-wrapper .item.unactive > span,
+.turquoise .portfolio.column ul li.unactive > span,
+.turquoise .masonry-wrapper .item > span,
+.turquoise .right-images li > span,
+.turquoise .portfolio.column li > span,
+.turquoise .circle:before{
+	border-color: #009dc0;
+}
+.turquoise .flex-control-paging li a:hover,
+.turquoise .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #009dc0 inset;
+}
+.white.turquoise .flex-control-paging li a:hover, 
+.white.turquoise .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #009dc0 inset;
+}

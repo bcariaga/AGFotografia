@@ -1,0 +1,83 @@
+.white .filter,
+.white .main-navi .drop-down a,
+body.white,
+.white .drop-down,
+.white .main-navi > div div:first-child,
+.white .main-navi > div, 
+.white .main-navi a,
+.white .left-menu{
+	background-color: #F8F8F8;
+}
+.white .show-hide-menu{
+	background-color: #F8F8F8 !important; 
+}
+.white .service .flex-control-paging li a{
+	box-shadow: 0 0 0 2px #fff inset;
+}
+.white .filter > a:hover {
+    border: 1px solid #ccc;
+}
+.white .masonry-wrapper.animate .item > span,
+.white .right-images:hover li > span,
+.white .portfolio.column ul.animate li > span{
+    background-color: rgba(255,255,255,.75);
+}
+.white .masonry-wrapper .item:hover > span,
+.white .right-images li:hover > span,
+.white .portfolio.column ul li:hover > span{
+    background-color: rgba(255,255,255,0);	
+}
+.white .soc-icons,
+.white .logo,
+.white .main-navi > div, 
+.white .main-navi a,
+.white .main-navi > div div:first-child{
+	border-bottom-color: #E9E9E9;
+}
+.white .soc-icons{
+	border-top-color: #E9E9E9;
+}
+.white .logo{
+	color: #333;
+}
+.white .main-navi > div:hover div:first-child, 
+.white .main-navi a:hover{
+	background-color: #E9E9E9;
+}
+.white .masonry-wrapper .item.unactive > span, 
+.white .portfolio.column ul li.unactive > span{
+	background-color: rgba(255,255,255,.9);
+}
+.white .main-navi > div:hover div:first-child, 
+.white .main-navi a:hover{
+	color: #333;
+}
+.white .soc-icons a{
+	color: #ccc;
+}
+.white .main-navi > div.active div:first-child {
+    background: none repeat scroll 0 0 #FF3333;
+    color: #fff;
+    padding-left: 50px;
+}
+.white .flex-control-paging li a{
+	box-shadow: 0 0 0 2px #ccc inset;
+}
+.white .flex-control-paging li a:hover, 
+.white .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #ff3333 inset;
+}
+.white .soc-icons a:hover{
+	color: #ff3333;
+}
+.white .copy{
+	color: rgba(0, 0, 0, 0.4);
+}
+.white .main-navi > div.active div:first-child,
+.white .main-navi > div.active, 
+.white .main-navi a.active{
+	background: #ff3333;
+}
+.white .main-navi .dot{
+	background: #ccc;
+}

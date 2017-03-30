@@ -1,0 +1,96 @@
+
+.lightgreen.white .main-navi > div.active div:first-child,
+.lightgreen.white .main-navi > div.active, 
+.lightgreen.white .main-navi a.active
+.lightgreen .tags-contents a.active,
+.lightgreen .blog-navi a:hover:before,
+.lightgreen .filter > a.active,
+.lightgreen .flex-direction-nav .flex-next:hover,
+.lightgreen .flex-direction-nav .flex-prev:hover,
+.lightgreen .details-close:hover,
+.lightgreen .button-close:hover,
+.lightgreen .blog-info a:before,
+.lightgreen input[type="submit"]:hover,
+.lightgreen .service-details .dots:before,
+.lightgreen .service-details .dots:after,
+.lightgreen .service-details .dots,
+.lightgreen .portfolio.horizontal li:hover a,
+.lightgreen .masonry-wrapper .item span.class,
+.lightgreen .portfolio-image li span.class,
+.lightgreen .right-images li span.class,
+.lightgreen .portfolio.column li span.class,
+.lightgreen .button-down,
+.lightgreen .home-page.flexslider .slides > li:before,
+.lightgreen .main-navi > div:hover .dot,
+.lightgreen .main-navi a:hover .dot,
+.lightgreen .main-navi > div.active div:first-child,
+.lightgreen .main-navi a.active:hover,
+.lightgreen .main-navi a.active{
+	background: #44b37e;
+}
+.lightgreen .masonry-wrapper .item em:before, 
+.lightgreen .right-images li em:before, 
+.lightgreen .portfolio.column li em:before,
+.lightgreen.white .soc-icons a:hover,
+.lightgreen .service-details .glyph,
+.lightgreen .blog-mini a:hover,
+.lightgreen .blog-navi a:hover,
+.lightgreen .search .glyph:hover,
+.lightgreen .skill .amount,
+.lightgreen .twitter-block .name,
+.lightgreen .twitter-block .glyph,
+.lightgreen .comments .reply:hover,
+.lightgreen .comments .user-name:hover,
+.lightgreen .var2.soc-icons a:hover,
+.lightgreen .show-more:hover,
+.lightgreen .blog-info .glyph,
+.lightgreen .blog-info a:hover,
+.lightgreen .blog-details a:hover,
+.lightgreen .member-details .soc-icons a:hover,
+.lightgreen .member-block:hover h2,
+.lightgreen .info-block em,
+.lightgreen textarea:focus,
+.lightgreen input[type="text"]:focus,
+.lightgreen input[type="text"].error,
+.lightgreen .soc-icons a:hover,
+.lightgreen .logo em:before{
+	color: #44b37e;
+}
+
+.lightgreen .main-navi > div.active .corner,
+.lightgreen .main-navi a.active .corner{
+	border-left-color: #44b37e;
+}
+.lightgreen .masonry-wrapper .item em:after,
+.lightgreen .right-images li em:after,
+.lightgreen .portfolio.column li em:after{
+	border-right-color: #44b37e;
+}
+.lightgreen .tags-contents a.active,
+.lightgreen .features-contents a:before,
+.lightgreen .skill .line,
+.lightgreen .filter > a.active,
+.lightgreen .show-more:hover,
+.lightgreen textarea:focus,
+.lightgreen input[type="text"]:focus,
+.lightgreen input[type="text"].error,
+.lightgreen .service .button:hover,
+.lightgreen .masonry-wrapper .item:hover > span,
+.lightgreen .right-images li:hover > span,
+.lightgreen .portfolio.column ul li:hover > span,
+.lightgreen .masonry-wrapper .item.unactive > span,
+.lightgreen .portfolio.column ul li.unactive > span,
+.lightgreen .masonry-wrapper .item > span,
+.lightgreen .right-images li > span,
+.lightgreen .portfolio.column li > span,
+.lightgreen .circle:before{
+	border-color: #44b37e;
+}
+.lightgreen .flex-control-paging li a:hover,
+.lightgreen .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 9px #44b37e inset;
+}
+.white.lightgreen .flex-control-paging li a:hover, 
+.white.lightgreen .flex-control-paging li a.flex-active{
+	box-shadow: 0 0 0 5px #44b37e inset;
+}

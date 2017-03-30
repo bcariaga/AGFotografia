@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="right-content">
+    <div class="col-md-3">
+        <div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4> Album</h4>
+                </div>
+                <div class="panel-body">
+                    <a class="btn btn-success" href="@Url.Action("NuevoAlbum", "Portfolio")">Nuevo Album</a><br /><br />
+                    <a class="btn btn-warning" href="@Url.Action("BorrarAlbum", "Portfolio")">Borrar Album</a><br /><br />
+                    <a class="btn btn-info" href="@Url.Action("Todos", "Home")">Editar Album</a>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4> Portadas</h4>
+                </div>
+                <div class="panel-body">
+                    <a class="btn btn-primary" href="@Url.Action("Portadas", "Home")">Cambiar Portadas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4> Usuarios</h4>
+                </div>
+                <div class="panel-body">
+                    @if (Session["Flickr"] != null && (bool)Session["Flickr"] == true)
+                    {
+                        <span class="text-info"> Flickr Autenticado.</span>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success" href="@Url.Action("FlickrAuth","Flickr")">Login Flickr</a>
+                    }
+                    
+                    <br />
+                    <br />
+                    <a class="btn btn-success" href="@Url.Action("Ingresar","Usuario")">Nuevo Usuario</a>
+                    <br />
+                    <br />
+                    <a class="btn btn-danger" href="@Url.Action("Logout","Usuario")">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-sucess close alerta" data-dismiss="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="text-center well" style="color:green;">@ViewBag.Mensaje</div>
+        </div>
+    }
+</div>
+

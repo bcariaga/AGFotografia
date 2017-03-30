@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Sobre Mi";
+    AGFotografia.Models.SobreMi sobreMi = ViewBag.SobreMi;
+}
+@if (Session["usuario"] == null)
+{
+    <!--  ABOUT  -->
+    <div class="right-content" style="opacity: 1;">
+        <div class="about main-block">
+            <div class="left-content col-lg-9">
+                <div class="scroller">
+                    <!--  CONTENT IMAGE  -->
+                    <img src="@sobreMi.Portada" class="portada" />
+                    <!--  //CONTENT IMAGE  -->
+                    <article class="left-content-text">
+                        <h2>@sobreMi.Titulo</h2>
+                        <strong>@sobreMi.Subtitulo</strong>
+                        <div class="row">
+                            <div id="texto1" class="col-lg-9 col-md-9 col-sm-9">
+                                <p>@sobreMi.Texto1</p>
+                                @* aca podemos poner otro texto seria el texto 2 *@
+                            </div>
+                            <div id="texto2" class="col-lg-6 col-md-6 col-sm-6">
+                                <p>@sobreMi.Texto2</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="scroller__track">
+                    <div class="scroller__bar" style="height: 646px; top: 67.8161px;"></div>
+                </div>
+            </div>
+            <!--  RIGHT IMAGES  -->
+            <div class="right-images col-lg-3" data-baron-v="inited">
+                <div class="scroller" style="width: 410px;">
+                    <ul>
+                        @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+                        {
+                            <li style="height: 310px; width: 410px;">
+                                <a href="../Portfolio/Ver?id=@album.ID">
+                                    <img src="@album.Portada" alt="" style="height: 310px; width: 410px;">
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="scroller__track">
+                    <div class="scroller__bar" style="height: 941px; top: 0px;"></div>
+                </div>
+            </div>
+            <!--  //RIGHT IMAGES  -->
+        </div>
+    </div>
+
+}else
+{
+    <!--  ABOUT  -->
+    <div class="right-content" style="opacity: 1;">
+        <div class="about main-block">
+            <div class="left-content col-lg-9">
+                <div class="scroller">
+                    <form method="post">
+                        <!--  CONTENT IMAGE  -->
+                        <img src="@sobreMi.Portada" class="portada" />
+                        <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#portada" aria-expanded="false" >
+                            Editar
+                        </a>
+                        <div class="collapse" id="portada">
+                            <div class="well">
+                                <input type="text" value="@sobreMi.Portada" name="portada" />
+                                <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                            </div>
+                        </div>
+                        <!--  //CONTENT IMAGE  -->
+                        <article class="left-content-text">
+                            <h2>@sobreMi.Titulo</h2>
+                            <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#titulo" aria-expanded="false" >
+                                Editar
+                            </a>
+                            <div class="collapse" id="titulo">
+                                <div class="well">
+                                    <input type="text" value="@sobreMi.Titulo" name="titulo" />
+                                    <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                                </div>
+                            </div>
+                            <strong>@sobreMi.Subtitulo</strong>
+                            <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#subtitulo" aria-expanded="false" >
+                                Editar
+                            </a>
+                            <div class="collapse" id="subtitulo">
+                                <div class="well">
+                                    <input type="text" value="@sobreMi.Subtitulo" name="subtitulo" />
+                                    <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <p>@sobreMi.Texto1</p>
+                                    <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#texto1" aria-expanded="false">
+                                        Editar
+                                    </a>
+                                    <div class="collapse" id="texto1">
+                                        <div class="well">
+                                            <textarea name="texto1">@sobreMi.Texto1</textarea>
+                                            <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                                        </div>
+                                    </div>
+                                    <p class="mini">@sobreMi.Texto2</p>
+                                    <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#texto2" aria-expanded="false" >
+                                        Editar
+                                    </a>
+                                    <div class="collapse" id="texto2">
+                                        <div class="well">
+                                            <textarea name="texto2">@sobreMi.Texto2</textarea>
+                                            <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="collapse" id="text3">
+                                        <div class="well">
+                                            <textarea name="texto3">@sobreMi.Texto3</textarea>
+                                            <button class="btn btn-xs btn-success" formaction="@Url.Action("Editar","SobreMi")"><span class="glyphicon glyphicon-ok"></span>OK!</button>
+                                        </div>
+                                        <p>@sobreMi.Texto3</p>
+                                        <a class="btn btn-xs btn-primary" role="button" data-toggle="collapse" href="#texto3" aria-expanded="false" >
+                                            Editar
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </form>
+                </div>
+                @*<div class="scroller__track">
+                    <div class="scroller__bar" style="height: 646px; top: 67.8161px;"></div>
+                </div>*@
+            </div>
+            <!--  RIGHT IMAGES  -->
+            @*<div class="right-images col-lg-3" data-baron-v="inited">
+                <div class="scroller" style="width: 410px;">
+                    <ul>
+                        @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+                        {
+                            <li style="height: 307px; width: 410px;">
+                                <a href=""><img src="@album.Portada" alt=""></a>
+                                <span><em></em></span>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="scroller__track">
+                    <div class="scroller__bar" style="height: 941px; top: 0px;"></div>
+                </div>
+            </div>*@
+            <!--  //RIGHT IMAGES  -->
+        </div>
+    </div>
+
+}

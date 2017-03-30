@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Portfolio";
+}
+<div class="right-content">
+
+    <div class="portfolio-details">
+        <div id="lightgallery" class="miniaturas">
+            @foreach (AGFotografia.Models.Foto foto in ViewBag.fotos)
+            {
+                <a href="@foto.SRC">
+                    <img class="images-bg hvr-bounce-in" src="@foto.Miniatura" draggable="false"/>
+                </a>
+            }
+
+        </div>
+
+        @*<div class="portfolio-image flexslider">
+            <ul class="slides">
+                @foreach (AGFotografia.Models.Foto foto in ViewBag.fotos)
+                {
+                    <li class="images-bg" >
+                        <img src="@foto.SRC" alt="" draggable="false" >
+                    </li>
+                }
+            </ul>
+            <ol class="flex-control-nav flex-control-paging">
+                <li><a class="flex-active">1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+            </ol>
+            <ul class="flex-direction-nav">
+                <li><a class="flex-prev glyph fa-angle-left" href="#"></a></li>
+                <li><a class="flex-next glyph fa-angle-right" href="#"></a></li>
+            </ul>
+        </div>*@
+    </div>
+
+</div>
+@section scripts{
+    
+    <script>
+        $(document).ready(function () {
+            $('#lightgallery > a:nth-child(1)').click();
+        })
+
+
+    </script>
+    
+    }
