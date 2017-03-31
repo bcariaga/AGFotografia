@@ -68,6 +68,11 @@ namespace AGFotografia.Controllers
             return View();           
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
         [ValidateInput(false)]
         public ActionResult EditarPortada1(FormCollection formulario)
         {

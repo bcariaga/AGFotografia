@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+@* TODO: si no esta logueada en Flikr no deja configurar nada.(o al menos fotos) *@
+<div class="right-content">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="jumbotron">
+            <h1>Hola! ¿que vamos a cambiar?</h1>
+            <p>
+                Antes que nada necesitas <a href="#">logear Flickr </a>
+            </p>
+        </div>
+        <div class="col-md-8 col-sm-8" id="opciones">
+            <div class="panel-group" id="menu" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-one">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#menu" href="#menu-one" aria-expanded="true" aria-controls="menu-one">
+                                Albunes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-one">
+                        <div class="panel-body">
+                            <p>Actualente hay <span class="text-info"> 5</span> albumnes creados, en total tenes <span class="text-info">124 </span> fotos. Agrega Mas!</p>
+                            <div class="btn-group-vertical" role="group">
+                                <button type="button" class="btn btn-success">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
+                                <button type="button" class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit"></span></button>
+                                <button type="button" class="btn btn-danger">Borrar <span class="glyphicon glyphicon-remove-sign "></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-two">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-two" aria-expanded="false" aria-controls="menu-two">
+                                Usuarios
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-two">
+                        <div class="panel-body">
+                            <p>Tenes 5 cuentas de usuario, cuanto menos tengas mejor!.</p>
+                            <div class="btn-group-vertical" role="group">
+                                <button type="button" class="btn btn-success">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
+                                <button type="button" class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit"></span></button>
+                                <button type="button" class="btn btn-danger">Borrar <span class="glyphicon glyphicon-remove-sign "></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-three">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-three" aria-expanded="false" aria-controls="menu-three">
+                                Extras
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-three" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-three">
+                        <div class="panel-body">
+                            <div class="">
+                                <button type="button" class="btn btn-primary">Portadas <span class="glyphicon glyphicon-edit"></span></button>
+                                <button type="button" class="btn btn-primary">Theme <span class="glyphicon glyphicon-edit"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="estadisticas" class="col-md-4 col-sm-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Visitas</div>
+                <div class="panel-body">
+                    <p>Ultimo Mes : 10</p>
+                    <p>Ultima Semana: 10</p>
+                    <p>Hoy : 10</p>
+                    <p>Desde el principio: 10</p>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Fotos</div>
+                <div class="panel-body">
+                    <p>Albunes : 10</p>
+                    <p>Fotos: 50</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

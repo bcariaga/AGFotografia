@@ -287,14 +287,13 @@
     <Content Include="Views\Home\Portadas.cshtml" />
     <Content Include="Views\Portfolio\BorrarAlbum.cshtml" />
     <Content Include="Views\Home\Todos.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Flickr\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
