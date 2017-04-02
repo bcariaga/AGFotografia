@@ -1,21 +1,35 @@
-﻿
+﻿@section style{
+<style>
+    .check
+    {
+        opacity:0.3;
+	    /*color:#996;*/
+    }
+</style>
+    
+}
+
+
 @{
     ViewBag.Title = "Admin";
+    List<AGFotografia.Models.AlbumFill> Albunes = ViewBag.Albunes;
+
 }
 @* TODO: si no esta logueada en Flikr no deja configurar nada.(o al menos fotos) *@
 <div class="right-content">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="jumbotron">
             <h1>Hola! ¿que vamos a cambiar?</h1>
-            <p>
-                Antes que nada necesitas <a href="#">logear Flickr </a>
+            <p id="mensajeControlFlickr">
+                Para editar los Albunes necesitas <a href="#">logear Flickr </a>.
             </p>
         </div>
         <div class="col-md-8 col-sm-8" id="opciones">
             <div class="panel-group" id="menu" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="menu-heading-one">
-                        <h4 class="panel-title">
+                       
+                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#menu" href="#menu-one" aria-expanded="true" aria-controls="menu-one">
                                 Albunes
                             </a>
@@ -23,11 +37,33 @@
                     </div>
                     <div id="menu-one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-one">
                         <div class="panel-body">
-                            <p>Actualente hay <span class="text-info"> 5</span> albumnes creados, en total tenes <span class="text-info">124 </span> fotos. Agrega Mas!</p>
-                            <div class="btn-group-vertical" role="group">
-                                <button type="button" class="btn btn-success">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
-                                <button type="button" class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit"></span></button>
-                                <button type="button" class="btn btn-danger">Borrar <span class="glyphicon glyphicon-remove-sign "></span></button>
+                            <p>Actualente hay <span class="text-info"> @Albunes.Count</span> albunes creados.
+                                <button class="btn btn-success btn-xs controlAlbum">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Titulo</th>
+                                        <th>Nro Fotos</th>
+                                        <th>Tags</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    @foreach (var item in Albunes)
+                                    {
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.Titulo</td>
+                                            <td>@item.Fotos.Count()</td>
+                                            <td>@item.Tags</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-xs controlAlbum" data-toggle="modal" data-target="#albumModal_@item.ID">Editar <span class="glyphicon glyphicon-edit"></span></button>
+                                                <button class="btn btn-danger btn-xs controlAlbum">Borrar <span class="glyphicon glyphicon-remove-sign"></span></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -88,6 +124,114 @@
                 </div>
             </div>
         </div>
+        @* Modales con formularios para editar los albunes *@
+        <div>
+            @foreach (var item in Albunes)
+            {
+                <div class="modal fade" id="albumModal_@item.ID" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Editar Album @item.Titulo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#datosBasicos_@item.ID" role="tab" data-toggle="tab">Datos Basicos</a></li>
+                                    <li role="presentation"><a href="#agregarFotos_@item.ID" role="tab" data-toggle="tab">Agregar Fotos</a></li>
+                                    <li role="presentation"><a href="#borrarFotos_@item.ID"  role="tab" data-toggle="tab">Borrar Fotos</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="datosBasicos_@item.ID">@* Datos Basicos *@
+                                        <div class="form-group">
+                                            <label class="control-label" for="titulo_@item.ID">Titulo:</label>
+                                            <input type="text" class="form-control" id="titulo_@item.ID" placeholder="Titulo" value="@item.Titulo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="tags_@item.ID">Tags:</label>
+                                            <input type="text" class="form-control" id="tags_@item.ID" placeholder="Tags" value="@item.Tags">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="portada_@item.ID">Portada:</label>
+                                            <input type="text" class="form-control" id="portada_@item.ID" placeholder="Portada" value="@item.Portada">
+                                            <label class="control-label" for="portadaFile_@item.ID">Subila con Flickr:</label>
+                                            <input type="file" class="form-control" name="portadaFile" id="portadaFile_@item.ID" accept="image/*" />
+                                        </div>
+                                        </div>
+                                    <div role="tabpanel" class="tab-pane" id="agregarFotos_@item.ID">...</div>@* Nuevas Fotos *@
+                                    <div role="tabpanel" class="tab-pane" id="borrarFotos_@item.ID">@* Borrar Fotos *@
+                                        <div>Selecciona las fotos que quieras borrar:</div>
+                                        <div class="media">
+                                            @foreach (AGFotografia.Models.Foto foto in item.Fotos)
+                                            {
+                                                <div class="col-md-3">
+                                                    <label class="btn btn-default">
+                                                        <img src="@foto.Miniatura" alt="AG Fotografia foto: @foto.ID" class="img-check img-thumbnail">
+                                                        <input type="checkbox" name="borrar" value="@foto.ID" id="@foto.ID" class="hidden" autocomplete="off">
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+ 
+        </div>
     </div>
 </div>
 
+@section scripts{
+<script>
+    $(document).ready(function () {
+        //TODO: Esto deberia estar en un js aparte.
+        function getCookie(name) {
+            var dc = document.cookie;
+            var prefix = name + "=";
+            var begin = dc.indexOf("; " + prefix);
+            if (begin == -1) {
+                begin = dc.indexOf(prefix);
+                if (begin != 0) return null;
+            }
+            else {
+                begin += 2;
+                var end = document.cookie.indexOf(";", begin);
+                if (end == -1) {
+                    end = dc.length;
+                }
+            }
+            // because unescape has been deprecated, replaced with decodeURI
+            //return unescape(dc.substring(begin + prefix.length, end));
+            return decodeURI(dc.substring(begin + prefix.length, end));
+        }
+        //convertir img en check
+        $(".img-check").click(function () {
+            $(this).toggleClass("check");
+            
+        });
+
+        var cookieFlickr = getCookie("OAuthToken");
+        if (cookieFlickr === null) {
+            $('.controlAlbum')
+                .prop('disabled', 'disabled')
+                .attr({
+                    "title": "necesitas estar logueada con Flickr"
+                })
+            
+           
+        } else {
+            $('#mensajeControlFlickr').html('Ya estas loggueada en Flickr.');
+        }
+
+    });
+</script>    
+    
+}

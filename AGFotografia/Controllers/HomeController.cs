@@ -70,6 +70,11 @@ namespace AGFotografia.Controllers
 
         public ActionResult Dashboard()
         {
+            AlbumManager am = new AlbumManager();
+            var albunes = am.ConsultarAlbumFill();
+
+            ViewBag.Albunes = albunes;
+
             return View();
         }
 
