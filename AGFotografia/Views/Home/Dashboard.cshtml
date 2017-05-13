@@ -1,0 +1,492 @@
+﻿@section style{
+<style>
+    .check
+    {
+        opacity:0.3;
+	    /*color:#996;*/
+    }
+
+    #carga {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1051;
+        background-color: rgba(169, 68, 66, 0.43);
+    }
+    #carga > img {
+        top:50%;        
+        right:50%;        
+        position: absolute;
+    }
+    .fileinput-button {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px !important;
+    direction: ltr;
+    cursor: pointer;
+}
+    .floating_alert {
+    position: absolute;
+    z-index: 5000;
+}
+
+    .message {
+        position: absolute;
+        z-index: 5000;
+    }
+   /* .inner-message {
+        margin: 0 auto;
+    }*/
+</style>
+    
+}
+
+
+@{
+    ViewBag.Title = "Admin";
+    List<AGFotografia.Models.AlbumFill> Albunes = ViewBag.Albunes;
+    @model AGFotografia.Models.AlbumFill
+
+}
+@* TODO: si no esta logueada en Flikr no deja configurar nada.(o al menos fotos) *@
+<div class="right-content">
+    <div id="carga" style="display:none;width:100%;height:100%;overflow:hidden">
+        <img src="~/Content/img/animal.gif" alt="El gato negro de la carga" />
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="jumbotron">
+            <h1>Hola! ¿que vamos a cambiar?</h1>
+            <p id="mensajeControlFlickr">
+                Para editar los Albunes necesitas <a href="#">logear Flickr </a>.
+            </p>
+        </div>
+        <div class="col-md-8 col-sm-8" id="opciones">
+            <div class="panel-group" id="menu" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-one">
+                       
+                         <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#menu" href="#menu-one" aria-expanded="true" aria-controls="menu-one">
+                                Albunes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-one">
+                        <div class="panel-body">
+                            <p>Actualente hay <span class="text-info"> @Albunes.Count</span> albunes creados.
+                                <button class="btn btn-success btn-xs controlAlbum">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Titulo</th>
+                                        <th>Nro Fotos</th>
+                                        <th>Tags</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    @foreach (var item in Albunes)
+                                    {
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.Titulo</td>
+                                            <td>@item.Fotos.Count()</td>
+                                            <td>@item.Tags</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-xs controlAlbum" data-toggle="modal" data-target="#albumModal_@item.ID">Editar <span class="glyphicon glyphicon-edit"></span></button>
+                                                <button class="btn btn-danger btn-xs controlAlbum">Borrar <span class="glyphicon glyphicon-remove-sign"></span></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-two">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-two" aria-expanded="false" aria-controls="menu-two">
+                                Usuarios
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-two">
+                        <div class="panel-body">
+                            <p>Tenes 5 cuentas de usuario, cuanto menos tengas mejor!.</p>
+                            <div class="btn-group-vertical" role="group">
+                                <button type="button" class="btn btn-success">Crear Nuevo <span class="glyphicon glyphicon-plus-sign"></span></button>
+                                <button type="button" class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit"></span></button>
+                                <button type="button" class="btn btn-danger">Borrar <span class="glyphicon glyphicon-remove-sign "></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-three">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-three" aria-expanded="false" aria-controls="menu-three">
+                                Extras
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-three" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-three">
+                        <div class="panel-body">
+                            <div class="">
+                                <button type="button" class="btn btn-primary">Portadas <span class="glyphicon glyphicon-edit"></span></button>
+                                <button type="button" class="btn btn-primary">Theme <span class="glyphicon glyphicon-edit"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="estadisticas" class="col-md-4 col-sm-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Visitas</div>
+                <div class="panel-body">
+                    <p>Ultimo Mes : 10</p>
+                    <p>Ultima Semana: 10</p>
+                    <p>Hoy : 10</p>
+                    <p>Desde el principio: 10</p>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Fotos</div>
+                <div class="panel-body">
+                    <p>Albunes : @Albunes.Count</p>
+                    
+                    <p>Fotos: 50</p>
+                </div>
+            </div>
+        </div>
+        @* Modales? con formularios para editar los albunes *@
+        <div>
+            @foreach (var item in Albunes)
+            {
+                <div class="modal fade" id="albumModal_@item.ID" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Editar Album @item.Titulo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#datosBasicos_@item.ID" role="tab" data-toggle="tab">Datos Basicos</a></li>
+                                    <li role="presentation"><a href="#agregarFotos_@item.ID" role="tab" data-toggle="tab">Agregar Fotos</a></li>
+                                    <li role="presentation"><a href="#borrarFotos_@item.ID"  role="tab" data-toggle="tab">Borrar Fotos</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    @* Datos Basicos *@
+                                    <div role="tabpanel" class="tab-pane active" id="datosBasicos_@item.ID">
+                                        <form name="editarAlbumFill" class="formDatosBasicos" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="ID" value="@item.ID" />
+                                            <div class="form-group">
+                                                <label class="control-label" >Titulo:</label>
+                                                <input name="Titulo" type="text" class="form-control" placeholder="Titulo" value="@item.Titulo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Tags:</label>
+                                                <input name="Tags" type="text" class="form-control" placeholder="Tags" value="@item.Tags">
+                                            </div>
+                                            <div class="form-group-sm">
+                                                <label class="control-label">Portada</label>
+                                                <input class="portadaFile" type="file" name="portadaFile">
+                                            </div>
+                                            <div class="form-group-sm">
+                                                <label class="control-label">Portada</label>                                               
+                                                <input type="text" name="Portada" class="form-control" placeholder="Portada" value="@item.Portada">
+                                            </div>
+                                            <hr />
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-xs btn-success editarAlbum">Listo!</button>  
+                                            </div>
+                                            <br />
+                                            
+                                        </form>
+                                    </div>
+                                    @* Agregar Fotos *@
+                                    <div role="tabpanel" class="tab-pane" id="agregarFotos_@item.ID">
+                                        <form method="post">
+                                            <input type="hidden" name="albumId" value="@item.ID" />
+                                            <div class="form-group">
+                                                <label> Fotos: </label>
+                                                <input type="file" name="fotos[]" multiple="multiple">
+                                            </div>
+                                            <span>O a la antigua:</span>
+                                            <button class="btn btn-xs btn-info agregarInputs" > Agregar   <spam class="glyphicon glyphicon-plus"></spam></button>
+                                            <div class="well">
+                                                <div class="contenedor">
+                                                    <div class="added">
+                                                        <input type="text" placeholder="SRC foto 1" name="srcFotos" id="campo_1" />
+                                                        <a href="#" class="eliminar-input btn btn-xs btn-danger">
+                                                            Borrar
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-xs btn-success agregarFotos">Listo!</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @* Borrar Fotos *@
+                                    <div role="tabpanel" class="tab-pane" id="borrarFotos_@item.ID">
+                                        <div>Selecciona las fotos que quieras borrar:</div>
+                                        <div class="media">
+                                            @foreach (AGFotografia.Models.Foto foto in item.Fotos)
+                                            {
+                                            <div class="col-md-3">
+                                                <label class="btn btn-default">
+                                                    <img src="@foto.Miniatura" alt="AG Fotografia foto: @foto.ID" class="img-check img-thumbnail imagenBorrar" data-imagenID="@foto.ID">
+
+                                                </label>
+                                            </div>
+                                            }
+                                        </div>
+                                        <hr />
+                                        <div class="pull-right">
+                                            <button onclick="borrarFotos()" class="btn btn-xs btn-danger">Borrar</button>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+ 
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @* resuleve el tema de las notificaciones *@
+<script src="~/Scripts/bootstrap-notify.js"></script>    
+    
+
+
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+ 	   
+       
+
+ 	    
+    //});
+    $(".agregarInputs").on("click", function (e) {
+        e.preventDefault();
+        var contenedor = $(this).next("div").find(".contenedor");
+        agregarInputs(contenedor);
+
+    });
+
+    function pantallaCarga() {
+        var carga = $('#carga');
+        //$.each($(".btn"), function (index, value) { $(value).toggleClass("disable") })
+        if (carga.is(':visible')) {
+            carga.hide();
+        } else {
+            carga.show();
+        }
+    }
+
+
+    $(".eliminar-input").on("click", function (e) { //click en eliminar campo
+        $(this).parent('div').remove(); //eliminar el campo
+        e.preventDefault();
+    });
+
+    $(".editarAlbum").on("click", function (e) {
+        e.preventDefault();
+        
+        pantallaCarga();
+        
+        var formData = new FormData($(this).closest("form")[0]);
+               
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: "/Portfolio/EditarAlbumJsonResult",
+            data: formData
+        }).done(function(r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+            
+        }).fail(function(r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+    });
+
+    $(".agregarFotos").on("click", function (e) {
+        e.preventDefault();
+
+        pantallaCarga();
+
+        var formData = new FormData($(this).closest("form")[0]);
+
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: "/Portfolio/AgregarFotos",
+            data: formData
+        }).done(function (r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+    });
+
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin !== 0) return null;
+        } else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+    //convertir img en check
+    $(".img-check").click(function() {
+        $(this).toggleClass("check");
+    });
+    var cookieFlickr = getCookie("OAuthToken");
+    if (cookieFlickr === null) {
+        $('.controlAlbum').prop('disabled', 'disabled').attr({
+            "title": "necesitas estar logueada con Flickr"
+        });
+    } else {
+        $('#mensajeControlFlickr').html('Ya estas loggueada en Flickr.');
+    }
+
+    //mensajes!
+    function mostrarMensaje(mensaje, type) {
+       
+        $.notify({
+            // options
+            message: mensaje
+        }, {
+            // settings
+            type: type,
+            z_index: 5000,
+            mouse_over: 'pause'
+        });
+    }
+   
+
+    function agregarInputs(contenedor) {
+        var MaxInputs = 100; //Número Maximo de Campos
+        //var contenedor = $("#formAdd"); //ID del contenedor
+        var AddButton = $("#agregarCampo"); //ID del Botón Agregar
+        
+        //var x = número de campos existentes en el contenedor
+        var x = contenedor.find("div").length + 1;
+        var FieldCount = x - 1; //para el seguimiento de los campos
+
+        if (x <= MaxInputs) //max input box allowed
+        {
+            FieldCount++;
+            //agregar campo
+            contenedor.append( '<div>' +
+                                    '<input type="text" name="srcFotos" id="campo_' + FieldCount + '" placeholder="SRC Foto ' + FieldCount + '"/>' +
+                                    '<a href="#" class="eliminar-input btn btn-xs btn-danger"> Borrar <span class="glyphicon glyphicon-remove"></span></a>' +
+                                '</div>'
+                                );
+            x++; //text box increment
+        }
+//        return false;
+        //$(AddButton).click(function (e) {
+           
+        //});
+
+       
+
+    }
+
+    function borrarFotos() {
+        pantallaCarga();
+        var elementos = $(".img-check.check");
+        if (elementos.length < 0) {
+            alert('Selecciona almenos alguna foto');
+        }
+        var ids = "";
+        $.each(elementos, function(i, v) {
+            ids += $(v).attr("data-imagenID") + ",";
+        });
+        ids = ids.slice(0, ids.length - 1);
+        var data = {
+            borrar: ids
+        };
+        $('#carga').show('slow');
+        $('#go').hide('fast');
+        $.ajax({
+            url:"@Url.Action("BorrarFotosJSonResult ", "Portfolio ")",
+            data: data
+        }).done(function(data) {
+            if (data.resultado == 0) {
+                mostrarMensaje(data.mensaje, 'success');
+                elementos.parent().remove();
+            } else {
+                mostrarMensaje(data.mensaje, 'danger');
+            }
+            console.log(data);
+        }).fail(function(data) {
+            mostrarMensaje(data.mensaje, 'danger');
+            console.log(data);
+        }).always(function(data) {
+            pantallaCarga();
+        });
+
+    };
+</script>    
+    
+
+}

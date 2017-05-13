@@ -20,7 +20,7 @@ namespace AGFotografia.Controllers
         //    {
         //        return View("Error");
         //    }
-            
+
         //}
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace AGFotografia.Controllers
                 return View("Error");
             }
         }
-        
+
         // GET: Portfolio
         public ActionResult Ver(int id)
         {
@@ -53,7 +53,7 @@ namespace AGFotografia.Controllers
             AlbumManager managerAlbum = new AlbumManager();
             List<Album> Albunes = managerAlbum.Consultar();
 
-           
+
             ViewBag.Albunes = Albunes;
 
             return View();
@@ -83,10 +83,10 @@ namespace AGFotografia.Controllers
             {
                 return View("Error");
             }
-           
+
         }
 
-        
+
         [ValidateInput(false)]
         [HttpPost]
         public JsonResult InsertarAlbumNew(FormCollection formulario, HttpPostedFileBase[] FotoFile)
@@ -97,7 +97,7 @@ namespace AGFotografia.Controllers
                 return Json(new { succes = false, mensaje = "se requiere autenticacion." });
             }
 
-           
+
             bool success = true;
             string errores = "";
 
@@ -131,20 +131,21 @@ namespace AGFotografia.Controllers
                 PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
                 nuevoAlbum.Portada = oPhotoInfo.OriginalUrl;
             }
-            else {
+            else
+            {
                 nuevoAlbum.Portada = formulario["portada"];
             }
 
             Album album = albumManager.Agregar(nuevoAlbum);
 
             var tituloFoto = formulario["titulo"];
-            var descripcion = formulario["titulo"]; 
+            var descripcion = formulario["titulo"];
             var tags = formulario["tags"];
             bool esPublica = true; //ojo con los bool
             bool isFamily = false; // ??
             bool isFriend = false; // ? 
 
-            
+
             foreach (var file in FotoFile)
             {
                 if (!albumManager.HasFile(file)) continue;
@@ -196,8 +197,8 @@ namespace AGFotografia.Controllers
                 success = false;
             }
 
-            return Json(new { succes = success, mensaje = errores});
-           
+            return Json(new { succes = success, mensaje = errores });
+
 
         }
 
@@ -283,116 +284,266 @@ namespace AGFotografia.Controllers
                 }
             }
 
-            
+
 
             FotosManager managerDeFotos = new FotosManager();
             managerDeFotos.Agregar(listaDeFotos);
 
             //return RedirectToAction("Index");
 
-            return Json(new { succes = true, mensaje = "aaasssdd"});
+            return Json(new { succes = true, mensaje = "aaasssdd" });
 
 
 
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditarAlbum(FormCollection formulario, HttpPostedFileBase[] FotoFile)
+        public ActionResult AgregarFotos(FormCollection formulario, HttpPostedFileBase[] FotoFile)
         {
             //Valido que exista session
             if (Session["usuario"] == null || Request.Cookies["OAuthToken"] == null)
             {
-                return View("Error");
+                return Json(
+                     new
+                     {
+                         resultado = -3,
+                         mensaje = "falta autenticación",
+                     },
+                     JsonRequestBehavior.AllowGet);
             }
-
+            var mensaje = "Todo Ok";
+            var resultado = 0;
+            string[] fotos = Request.Form.GetValues("srcFotos");
             //Instancio el Controll de flickr
             var f = FlickrManager.GetAuthInstance();
 
-            //nuevo objeto album para hacer el update
-            Album albumNuevo = new Album();
-            albumNuevo.ID = Convert.ToInt32(formulario["ID"]);
+            AlbumManager am = new AlbumManager();
 
-            //si viene un archivo para portada lo subo y updateo
-            if (Request.Files["portadaFile"] != null)
-            {
-                var file = Request.Files["portadaFile"];
-
-                string photoId = f.UploadPicture(file.InputStream,  //file
-                                                                file.FileName,      //Filename
-                                                                albumNuevo.Titulo,
-                                                                "portada de: " + albumNuevo.Titulo,
-                                                                albumNuevo.Tags,
-                                                                true,//esPublica,
-                                                                false,//isFamily,
-                                                                false,//isFriend,
-                                                                ContentType.Photo,
-                                                                SafetyLevel.Safe,
-                                                                HiddenFromSearch.Hidden
-                                                            );
-                PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
-                albumNuevo.Portada = oPhotoInfo.OriginalUrl;
-            }
-            else
-            {
-                albumNuevo.Portada = formulario["portada"];
-            }
-
-
-            albumNuevo.Titulo = formulario["titulo"];
-            albumNuevo.Tags = formulario["tags"];
-
-            AlbumManager managerDeAlbum = new AlbumManager();
-            managerDeAlbum.Editar(albumNuevo);
-
-            /* FIN ALBUM*/
+            Album album = am.ConsultarPorID(Convert.ToInt32(formulario["Id"]));
 
             /*FOTOS*/
             var listaDeFotos = new List<Foto>();
 
-            foreach (var file in FotoFile)
+            if (FotoFile.Length > 0)
             {
-                if (file != null && file.ContentLength > 0) continue;
-                try
+                foreach (var file in FotoFile)
                 {
-                    string photoId = f.UploadPicture(file.InputStream,  //file
-                                                                file.FileName,      //Filename
-                                                                albumNuevo.Titulo,
-                                                                "del album : " + albumNuevo.Titulo,
-                                                                albumNuevo.Tags,
-                                                                true,//esPublica,
-                                                                false,//isFamily,
-                                                                false,//isFriend,
-                                                                ContentType.Photo,
-                                                                SafetyLevel.Safe,
-                                                                HiddenFromSearch.Hidden
-                                                                );
-                    PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
+                    if (file != null && file.ContentLength > 0) continue;
+                    try
+                    {
+                        string photoId = f.UploadPicture(file.InputStream,  //file
+                                                                    file.FileName,      //Filename
+                                                                    file.FileName,
+                                                                    "del album : " + album.Titulo,
+                                                                    album.Tags,
+                                                                    true,//esPublica,
+                                                                    false,//isFamily,
+                                                                    false,//isFriend,
+                                                                    ContentType.Photo,
+                                                                    SafetyLevel.Safe,
+                                                                    HiddenFromSearch.Hidden
+                                                                    );
+                        PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
 
+                        Foto foto = new Foto();
+
+                        foto.ID_Album = album.ID;
+
+                        foto.SRC = oPhotoInfo.OriginalUrl;
+
+                        foto.Miniatura = oPhotoInfo.ThumbnailUrl;
+
+                        listaDeFotos.Add(foto);
+                    }
+                    catch (Exception e)
+                    {
+
+                        mensaje = e.Message;
+                        resultado = -1;
+                        return Json(
+                             new
+                             {
+                                 resultado = resultado,
+                                 mensaje = "no se puedieron agregar las fotos, mensaje: " + mensaje + "stackTrace: " + e.StackTrace,
+                             },
+                         JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            else if (fotos.Length > 0)
+            {
+
+                int cantidad = fotos.Length;
+                int idAlbum = Convert.ToInt32(formulario["ID"]);
+
+                for (int i = 0; i < cantidad; i++)
+                {
                     Foto foto = new Foto();
-
-                    foto.ID_Album = albumNuevo.ID;
-
-                    foto.SRC = oPhotoInfo.OriginalUrl;
-
-                    foto.Miniatura = oPhotoInfo.ThumbnailUrl;
+                    foto.SRC = fotos[i];
+                    if (foto.SRC == null | foto.SRC.Length == 0)
+                    {
+                        continue;
+                    }
+                    foto.ID_Album = idAlbum;
 
                     listaDeFotos.Add(foto);
                 }
-                catch (Exception e)
-                {
-
-                    throw e;
-                }
             }
 
-            FotosManager managerDeFotos = new FotosManager();
-            managerDeFotos.Agregar(listaDeFotos);
 
-            return RedirectToAction("ModificarAlbum", new { id = albumNuevo.ID });
-           
+            try
+            {
+                FotosManager managerDeFotos = new FotosManager();
+                managerDeFotos.Agregar(listaDeFotos);
+            }
+            catch (Exception e)
+            {
+                resultado = -1;
+                mensaje = " Ocurrió un error: " + e.Message;
 
-           
+            }
+
+            return Json(
+                          new
+                          {
+                              resultado = resultado,
+                              mensaje = mensaje
+                          },
+                      JsonRequestBehavior.AllowGet);
+
+
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult EditarAlbumJsonResult(AlbumFill album, HttpPostedFileBase[] portadaFile)
+        {
+
+            //Valido que exista session
+            if (Session["usuario"] == null || Request.Cookies["OAuthToken"] == null)
+            {
+
+                return Json(
+                     new
+                     {
+                         resultado = -3,
+                         mensaje = "falta autenticación",
+                     },
+                     JsonRequestBehavior.AllowGet);
+            }
+
+            var mensaje = "Todo Ok";
+            var resultado = 0;
+
+            if (!ModelState.IsValid)
+            {
+                mensaje = "los datos son incorrectos, por favor revisalos.";
+                resultado = -1;
+
+                return Json(
+                     new
+                     {
+                         resultado = resultado,
+                         mensaje = mensaje,
+                         album = album
+                     },
+                     JsonRequestBehavior.AllowGet);
+            }
+
+
+            //Instancio el Control de flickr
+            var f = FlickrManager.GetAuthInstance();
+
+            try
+            {
+                //si viene un archivo para portada lo subo y updateo
+                if (portadaFile != null)
+                {
+                    //var file = Request.Files["portadaFile"];
+
+                    string photoId = f.UploadPicture(portadaFile[0].InputStream,  //file
+                                                                    portadaFile[0].FileName,      //Filename
+                                                                    album.Titulo,
+                                                                    "portada de: " + album.Titulo,
+                                                                    album.Tags,
+                                                                    true,//esPublica,
+                                                                    false,//isFamily,
+                                                                    false,//isFriend,
+                                                                    ContentType.Photo,
+                                                                    SafetyLevel.Safe,
+                                                                    HiddenFromSearch.Hidden
+                                                                );
+                    PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
+                    album.Portada = oPhotoInfo.OriginalUrl;
+                }
+
+
+
+
+                AlbumManager managerDeAlbum = new AlbumManager();
+                managerDeAlbum.EditarFill(album);
+
+            }
+            catch (Exception e)
+            {
+                mensaje = e.Message;
+                resultado = -1;
+
+            }
+            /* FIN ALBUM*/
+
+            /*FOTOS*/
+            //var listaDeFotos = new List<Foto>();
+
+            //foreach (var file in FotoFile)
+            //{
+            //    if (file != null && file.ContentLength > 0) continue;
+            //    try
+            //    {
+            //        string photoId = f.UploadPicture(file.InputStream,  //file
+            //                                                    file.FileName,      //Filename
+            //                                                    albumNuevo.Titulo,
+            //                                                    "del album : " + albumNuevo.Titulo,
+            //                                                    albumNuevo.Tags,
+            //                                                    true,//esPublica,
+            //                                                    false,//isFamily,
+            //                                                    false,//isFriend,
+            //                                                    ContentType.Photo,
+            //                                                    SafetyLevel.Safe,
+            //                                                    HiddenFromSearch.Hidden
+            //                                                    );
+            //        PhotoInfo oPhotoInfo = f.PhotosGetInfo(photoId);
+
+            //        Foto foto = new Foto();
+
+            //        foto.ID_Album = albumNuevo.ID;
+
+            //        foto.SRC = oPhotoInfo.OriginalUrl;
+
+            //        foto.Miniatura = oPhotoInfo.ThumbnailUrl;
+
+            //        listaDeFotos.Add(foto);
+            //    }
+            //    catch (Exception e)
+            //    {
+
+            //        throw e;
+            //    }
+            //}
+
+            //FotosManager managerDeFotos = new FotosManager();
+            //managerDeFotos.Agregar(listaDeFotos);
+
+            return Json(
+                     new
+                     {
+                         resultado = resultado,
+                         mensaje = mensaje,
+                         album = album
+                     }, "json", JsonRequestBehavior.AllowGet);
+
+        }
+
         [ValidateInput(false)]
         public ActionResult BorrarFoto(FormCollection formulario)
         {
@@ -407,8 +558,43 @@ namespace AGFotografia.Controllers
 
             string idAlbum = formulario["ID"];
 
-            return RedirectToAction("ModificarAlbum", new {id= idAlbum });
+            return RedirectToAction("ModificarAlbum", new { id = idAlbum });
         }
+        public JsonResult BorrarFotosJSonResult()
+        {
+            int resultado = 0;
+            string mensaje = "<strong>Listo!</strong> ya borramos esas fotos.";
+
+
+
+            try
+            {
+                FotosManager manager = new FotosManager();
+
+                string borrar = Request.Params["borrar"];
+                string[] ids = borrar.Split(',');
+                foreach (string asd in ids)
+                {
+                    int id = Convert.ToInt32(asd);
+                    manager.Borrar(id);
+                }
+            }
+            catch (Exception e)
+            {
+
+                resultado = -1;
+                mensaje = e.Message;
+
+            }
+            return Json(
+                    new
+                    {
+                        resultado = resultado,
+                        mensaje = mensaje
+                    },
+                    JsonRequestBehavior.AllowGet);
+        }
+
 
         [ValidateInput(false)]
         public ActionResult ModificarAlbum(int id)
@@ -441,8 +627,8 @@ namespace AGFotografia.Controllers
                 albumManager.Borrar(id);
 
                 string album = "borrado";
-                 
-                return RedirectToAction("Admin","Home", new { album });
+
+                return RedirectToAction("Admin", "Home", new { album });
             }
             else
             {
@@ -462,7 +648,8 @@ namespace AGFotografia.Controllers
         }
 
         [HttpGet]
-        public ActionResult NuevoAlbum() {
+        public ActionResult NuevoAlbum()
+        {
 
             return View();
         }
@@ -475,6 +662,6 @@ namespace AGFotografia.Controllers
             return View();
         }
 
-        
+
     }
 }

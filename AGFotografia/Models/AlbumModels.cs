@@ -13,8 +13,17 @@ namespace AGFotografia.Models
     {
         public int ID { get; set; }
         public string Titulo { get; set; }
-        public string Tags { get; set; } 
+        public string Tags { get; set; }
         public string Portada { get; set; }
+    }
+
+    public class AlbumFill
+    {
+        public int ID { get; set; }
+        public string Titulo { get; set; }
+        public string Tags { get; set; }
+        public string Portada { get; set; }
+        public List<Foto> Fotos { get; set; }
     }
 
 
@@ -39,7 +48,7 @@ namespace AGFotografia.Models
 
             SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
 
-            adaptador.Fill(tabla);  
+            adaptador.Fill(tabla);
 
             foreach (DataRow fila in tabla.Rows)
             {
@@ -55,6 +64,47 @@ namespace AGFotografia.Models
             return albunes;
         }
 
+        public List<AlbumFill> ConsultarAlbumFill()
+        {
+            List<AlbumFill> albunes = new List<AlbumFill>();
+            FotosManager fm = new FotosManager();
+
+            SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
+
+            SqlCommand consulta = new SqlCommand("SELECT  A.ID " +
+                                                        ",A.Titulo " +
+                                                        ",A.Tags " +
+                                                        ",A.Portada " +
+                                                    "FROM Albunes A " +
+                                                    "ORDER BY A.ID");
+
+            consulta.Connection = conexion;
+
+            DataTable tabla = new DataTable();
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
+
+            adaptador.Fill(tabla);
+
+            foreach (DataRow fila in tabla.Rows)
+            {
+                AlbumFill album = new AlbumFill();
+                album.ID = (int)fila["ID"];
+                album.Titulo = fila["Titulo"].ToString();
+                album.Tags = fila["Tags"].ToString();
+                album.Portada = fila["Portada"].ToString();
+
+                albunes.Add(album);
+            }
+            //lleno las fotos de los albunes
+            foreach (AlbumFill album in albunes)
+            {
+                album.Fotos = fm.Consultar(album.ID);
+            }
+
+            return albunes;
+        }
+
         /// <summary>
         /// Consulta 1 album
         /// </summary>
@@ -62,12 +112,20 @@ namespace AGFotografia.Models
         /// <returns> list</returns>
         public Album ConsultarPorID(int id)
         {
-           
-
             SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
 
-            SqlCommand consulta = new SqlCommand("SELECT * FROM Albunes WHERE ID=@ID");
+
+            SqlCommand consulta = new SqlCommand("SELECT  A.ID" +
+                                                        ",A.Titulo" +
+                                                        ",A.Tags" +
+                                                        ",A.Portada" +
+                                                    "FROM Albunes A" +
+                                                    "WHERE A.ID=@ID" +
+                                                    "ORDER BY A.ID");
             consulta.Parameters.AddWithValue("@ID", id);
+
+            //SqlCommand consulta = new SqlCommand("SELECT * FROM Albunes WHERE ID=@ID");
+            //consulta.Parameters.AddWithValue("@ID", id);
 
             consulta.Connection = conexion;
 
@@ -81,16 +139,13 @@ namespace AGFotografia.Models
 
             foreach (DataRow fila in tabla.Rows)
             {
-               
+
                 albumConsultado.ID = (int)fila["ID"];
                 albumConsultado.Titulo = fila["Titulo"].ToString();
                 albumConsultado.Tags = fila["Tags"].ToString();
                 albumConsultado.Portada = fila["Portada"].ToString();
             }
-
             return albumConsultado;
-
-
         }
 
 
@@ -110,7 +165,7 @@ namespace AGFotografia.Models
 
             conexion.Open();
 
-            
+
             SqlCommand insert = conexion.CreateCommand();
             insert.CommandText = "INSERT INTO Albunes (Titulo, Tags, Portada) VALUES (@titulo, @tags, @portada)";
             insert.Parameters.AddWithValue("@titulo", album.Titulo);
@@ -125,7 +180,7 @@ namespace AGFotografia.Models
 
             //albumNew.ID =Convert.ToInt32(insert.ExecuteScalar()); no funca
             conexion.Close();
-            
+
 
             return albumNew;
         }
@@ -134,6 +189,25 @@ namespace AGFotografia.Models
         /// </summary>
         /// <param name="album">Objeto con los datos a editar</param>
         public void Editar(Album album)
+        {
+            string strLimpia = Cleaner.Limpiador.Limpiar(album.Portada);
+            SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
+
+            conexion.Open();
+
+            SqlCommand update = conexion.CreateCommand();
+            update.CommandText = "UPDATE Albunes SET Titulo=@titulo, Tags=@tags, Portada=@portada WHERE ID=@id";
+            update.Parameters.AddWithValue("@titulo", album.Titulo);
+            update.Parameters.AddWithValue("@tags", album.Tags);
+            update.Parameters.AddWithValue("@portada", strLimpia);
+            update.Parameters.AddWithValue("@ID", album.ID);
+
+            update.ExecuteNonQuery();
+
+            conexion.Close();
+
+        }
+        public void EditarFill(AlbumFill album)
         {
             string strLimpia = Cleaner.Limpiador.Limpiar(album.Portada);
             SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
@@ -178,7 +252,7 @@ namespace AGFotografia.Models
             deleteAlbum.Parameters.AddWithValue("@id", idAlbum);
 
             deleteAlbum.ExecuteNonQuery();
-           
+
             conexion.Close();
 
         }
