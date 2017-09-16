@@ -1,96 +1,110 @@
 
-.lightgreen.white .main-navi > div.active div:first-child,
-.lightgreen.white .main-navi > div.active, 
-.lightgreen.white .main-navi a.active
-.lightgreen .tags-contents a.active,
-.lightgreen .blog-navi a:hover:before,
-.lightgreen .filter > a.active,
-.lightgreen .flex-direction-nav .flex-next:hover,
-.lightgreen .flex-direction-nav .flex-prev:hover,
-.lightgreen .details-close:hover,
-.lightgreen .button-close:hover,
-.lightgreen .blog-info a:before,
-.lightgreen input[type="submit"]:hover,
-.lightgreen .service-details .dots:before,
-.lightgreen .service-details .dots:after,
-.lightgreen .service-details .dots,
-.lightgreen .portfolio.horizontal li:hover a,
-.lightgreen .masonry-wrapper .item span.class,
-.lightgreen .portfolio-image li span.class,
-.lightgreen .right-images li span.class,
-.lightgreen .portfolio.column li span.class,
-.lightgreen .button-down,
-.lightgreen .home-page.flexslider .slides > li:before,
-.lightgreen .main-navi > div:hover .dot,
-.lightgreen .main-navi a:hover .dot,
-.lightgreen .main-navi > div.active div:first-child,
-.lightgreen .main-navi a.active:hover,
-.lightgreen .main-navi a.active{
+.white .main-navi > div.active div:first-child,
+.white .main-navi > div.active, 
+.white .main-navi a.active
+ .tags-contents a.active,
+ .blog-navi a:hover:before,
+ .filter > a.active,
+ .flex-direction-nav .flex-next:hover,
+ .flex-direction-nav .flex-prev:hover,
+ .details-close:hover,
+ .button-close:hover,
+ .blog-info a:before,
+ input[type="submit"]:hover,
+ .service-details .dots:before,
+ .service-details .dots:after,
+ .service-details .dots,
+ .portfolio.horizontal li:hover a,
+ .masonry-wrapper .item span.class,
+ .portfolio-image li span.class,
+ .right-images li span.class,
+ .portfolio.column li span.class,
+ .button-down,
+ .home-page.flexslider .slides > li:before,
+ .main-navi > div:hover .dot,
+ .main-navi a:hover .dot,
+ .main-navi > div.active div:first-child,
+ .main-navi a.active:hover,
+ .main-navi a.active{
 	background: #44b37e;
 }
-.lightgreen .masonry-wrapper .item em:before, 
-.lightgreen .right-images li em:before, 
-.lightgreen .portfolio.column li em:before,
-.lightgreen.white .soc-icons a:hover,
-.lightgreen .service-details .glyph,
-.lightgreen .blog-mini a:hover,
-.lightgreen .blog-navi a:hover,
-.lightgreen .search .glyph:hover,
-.lightgreen .skill .amount,
-.lightgreen .twitter-block .name,
-.lightgreen .twitter-block .glyph,
-.lightgreen .comments .reply:hover,
-.lightgreen .comments .user-name:hover,
-.lightgreen .var2.soc-icons a:hover,
-.lightgreen .show-more:hover,
-.lightgreen .blog-info .glyph,
-.lightgreen .blog-info a:hover,
-.lightgreen .blog-details a:hover,
-.lightgreen .member-details .soc-icons a:hover,
-.lightgreen .member-block:hover h2,
-.lightgreen .info-block em,
-.lightgreen textarea:focus,
-.lightgreen input[type="text"]:focus,
-.lightgreen input[type="text"].error,
-.lightgreen .soc-icons a:hover,
-.lightgreen .logo em:before{
+ .masonry-wrapper .item em:before, 
+ .right-images li em:before, 
+ .portfolio.column li em:before,
+.white .soc-icons a:hover,
+ .service-details .glyph,
+ .blog-mini a:hover,
+ .blog-navi a:hover,
+ .search .glyph:hover,
+ .skill .amount,
+ .twitter-block .name,
+ .twitter-block .glyph,
+ .comments .reply:hover,
+ .comments .user-name:hover,
+ .var2.soc-icons a:hover,
+ .show-more:hover,
+ .blog-info .glyph,
+ .blog-info a:hover,
+ .blog-details a:hover,
+ .member-details .soc-icons a:hover,
+ .member-block:hover h2,
+ .info-block em,
+ textarea:focus,
+ input[type="text"]:focus,
+ input[type="text"].error,
+ .soc-icons a:hover,
+  em:before{
 	color: #44b37e;
 }
 
-.lightgreen .main-navi > div.active .corner,
-.lightgreen .main-navi a.active .corner{
+ .main-navi > div.active .corner,
+ .main-navi a.active .corner{
 	border-left-color: #44b37e;
 }
-.lightgreen .masonry-wrapper .item em:after,
-.lightgreen .right-images li em:after,
-.lightgreen .portfolio.column li em:after{
+ .masonry-wrapper .item em:after,
+ .right-images li em:after,
+ .portfolio.column li em:after{
 	border-right-color: #44b37e;
 }
-.lightgreen .tags-contents a.active,
-.lightgreen .features-contents a:before,
-.lightgreen .skill .line,
-.lightgreen .filter > a.active,
-.lightgreen .show-more:hover,
-.lightgreen textarea:focus,
-.lightgreen input[type="text"]:focus,
-.lightgreen input[type="text"].error,
-.lightgreen .service .button:hover,
-.lightgreen .masonry-wrapper .item:hover > span,
-.lightgreen .right-images li:hover > span,
-.lightgreen .portfolio.column ul li:hover > span,
-.lightgreen .masonry-wrapper .item.unactive > span,
-.lightgreen .portfolio.column ul li.unactive > span,
-.lightgreen .masonry-wrapper .item > span,
-.lightgreen .right-images li > span,
-.lightgreen .portfolio.column li > span,
-.lightgreen .circle:before{
+ .tags-contents a.active,
+ .features-contents a:before,
+ .skill .line,
+ .filter > a.active,
+ .show-more:hover,
+ textarea:focus,
+ input[type="text"]:focus,
+ input[type="text"].error,
+ .service .button:hover,
+ .masonry-wrapper .item:hover > span,
+ .right-images li:hover > span,
+ .portfolio.column ul li:hover > span,
+ .masonry-wrapper .item.unactive > span,
+ .portfolio.column ul li.unactive > span,
+ .masonry-wrapper .item > span,
+ .right-images li > span,
+ .portfolio.column li > span,
+ .circle:before{
 	border-color: #44b37e;
 }
-.lightgreen .flex-control-paging li a:hover,
-.lightgreen .flex-control-paging li a.flex-active{
+ .flex-control-paging li a:hover,
+ .flex-control-paging li a.flex-active{
 	box-shadow: 0 0 0 9px #44b37e inset;
 }
-.white.lightgreen .flex-control-paging li a:hover, 
-.white.lightgreen .flex-control-paging li a.flex-active{
+.white .flex-control-paging li a:hover, 
+.white .flex-control-paging li a.flex-active{
 	box-shadow: 0 0 0 5px #44b37e inset;
+}
+
+.masonry-wrapper .item:hover a,
+	.right-images li:hover a,
+	.portfolio.column li:hover a{
+		box-shadow: inset 0 0 0 4px #44b37e;
+}
+
+.logo {
+	color: #44b37e;
+}
+
+.logo:hover {
+	color: #44b37e;
 }

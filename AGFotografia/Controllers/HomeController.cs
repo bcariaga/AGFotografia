@@ -18,12 +18,123 @@ namespace AGFotografia.Controllers
             ViewBag.Portadas = portadasManager.Consultar();
 
             AlbumManager managerAlbum = new AlbumManager();
-            List<Album> Albunes = managerAlbum.Consultar();
+            //ViewBag.Albunes = managerAlbum.Consultar();
+            ViewBag.Albunes = managerAlbum.ConsultarAlbumFill();
+            //ViewBag.ColorTheme = ConfigurationManager.AppSettings["Color.Theme"];
 
-            ViewBag.Albunes = Albunes;
 
             return View();
         }
+        [HttpPost]
+        public JsonResult NuevoUser() {
+
+            string mensaje = "Ok";
+            int resultado = 0;
+
+            var im = new IngresoManager();
+            try
+            {
+
+                im.NuevoIngreso();
+                Session["invitado"] = "Bienvenido!";
+            }
+            catch (Exception e)
+            {
+
+                mensaje = e.Message;
+                resultado = -1;
+            }
+
+            return Json(
+                new
+                {
+                    mensaje = mensaje,
+                    resultado = resultado
+                }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //public List<MyCookieStatus> myCookies;
+        /*algun dia, uso de cookies (deprecated)*/
+        //public ActionResult Index()
+        //{
+        //    //bool havePing = ping.HasValue ? ping.Value : false;
+
+        //    //Request.Cookies
+        //    if (Session.IsNewSession)
+        //    {
+        //        Session.Add("Invitado",new { ultimoIngreso = DateTime.Now});
+        //        return View();
+
+        //    }
+        //    else //hacer toda la logica de las cookies
+        //    {
+
+        //        /*Control de cookies*/
+        //        CheckCookies(Request.Cookies);
+
+        //        var ultimoIngreso = myCookies.Single(x => x.Name == "ultimoIngreso");
+
+        //        if (ultimoIngreso.Status)
+        //        {
+        //           List<Portada> portadas = Request.Cookies["portadas"].Value;
+        //        }
+
+        //        PortadasManager portadasManager = new PortadasManager();
+        //        ViewBag.Portadas = portadasManager.Consultar();
+
+        //        AlbumManager managerAlbum = new AlbumManager();
+        //        List<Album> Albunes = managerAlbum.Consultar();
+
+        //        ViewBag.Albunes = Albunes;
+
+        //        return View("_index");
+        //    }
+
+
+        //}
+       
+        //private void CheckCookies(HttpCookieCollection cookies) {
+
+
+        //    var _ultimaVisita =cookies["ultimaVisita"];
+        //    var _index = cookies["index"];
+        //    var _albunes= cookies["albunes"];
+
+            
+        //    bool ultimaVisita = _ultimaVisita != null ? true : false;
+        //    bool index = _index != null ? true : false;
+        //    bool albunes = _albunes != null ? true : false;
+
+        //    var ultimaModificacion = new UltimaModificacion().GetUtimaModificacion();
+
+        //    if (ultimaVisita && Convert.ToDateTime(_ultimaVisita.Values[0]) <= ultimaModificacion.Fecha)
+        //    {
+        //        ultimaVisita = false;
+        //    }
+
+
+
+        //    myCookies.Add(
+        //        new MyCookieStatus(
+        //            "ultimaVisita", ultimaVisita
+        //        )
+        //    );
+
+        //    myCookies.Add(
+        //        new MyCookieStatus(
+        //            "index ", index
+        //        )
+        //    );
+
+        //    myCookies.Add(
+        //        new MyCookieStatus(
+        //            "albunes", albunes
+        //        )
+        //    );
+
+        
+        //}
 
         public ActionResult Todos()
         {
@@ -41,78 +152,25 @@ namespace AGFotografia.Controllers
             {
                 return View("Error");
             }
- 
+
         }
 
-        public ActionResult Admin( string mensaje)
-        {
-            if(Session["usuario"]!= null)
-            {
-                ViewBag.Mensaje = mensaje;
-                return View();
+        //public ActionResult Admin(string mensaje)
+        //{
+        //    if (Session["usuario"] != null)
+        //    {
+        //        ViewBag.Mensaje = mensaje;
+        //        return View();
 
-            }
-            else
-            {
-                return View("Error");
-            }
-           
-        }
+        //    }
+        //    else
+        //    {
+        //        return View("Error");
+        //    }
 
-        public ActionResult Portadas()
-        {
-            PortadasManager portadasManager = new PortadasManager();
-            ViewBag.Portadas = portadasManager.Consultar();
+        //}
 
-                        
-            return View();           
-        }
-
-        [ValidateInput(false)]
-        public ActionResult EditarPortada1(FormCollection formulario)
-        {
-                Portada portada1 = new Portada();
-                portada1.ID =Convert.ToInt32(formulario["IdPortada1"]);
-                portada1.SRC = formulario["SRC1"];
-                portada1.Texto = formulario["textoPortada1"];
-
-                PortadasManager portadasManager = new PortadasManager();
-                portadasManager.Editar(portada1);
-
-                
-                return RedirectToAction("Portadas");
-        }
-
-        [ValidateInput(false)]
-        public ActionResult EditarPortada2(FormCollection formulario)
-        {
-            PortadasManager portadasManager = new PortadasManager();
-
-            Portada portada2 = new Portada();
-            portada2.ID = Convert.ToInt32(formulario["IdPortada2"]);
-            portada2.SRC = formulario["SRC2"];
-            portada2.Texto = formulario["textoPortada2"];
-
-            portadasManager.Editar(portada2);
-
-            return RedirectToAction("Portadas");
-        }
-
-        [ValidateInput(false)]
-        public ActionResult EditarPortada3(FormCollection formulario)
-        {
-            PortadasManager portadasManager = new PortadasManager();
-
-
-            Portada portada3 = new Portada();
-            portada3.ID = Convert.ToInt32(formulario["IdPortada3"]);
-            portada3.SRC = formulario["SRC3"];
-            portada3.Texto = formulario["textoPortada3"];
-
-            portadasManager.Editar(portada3);
-
-            return RedirectToAction("Portadas");
-        }
+       
 
         public ActionResult Comentario(FormCollection formulario)
         {
@@ -140,7 +198,7 @@ namespace AGFotografia.Controllers
                                         "<span style='font-style: normal;font-weight: 400;Margin-bottom: 0;Margin-top: 14px;font-size: 22px;line-height: 30px;font-family: Ubuntu,sans-serif;color: #3e4751;text-align: center;' >" + "¡Gracias por tu contato!" + "</span>" +
                                       "</div>" +
                                       "<div>" +
-                                        "<p style='font-style: normal;font-weight: 400;Margin-bottom: 22px;Margin-top: 18px;font-size: 13px;line-height: 22px;font-family: 'PT Serif',Georgia,serif;color: #7c7e7f;text-align: left;' >" + nombre +", ya recibi tu consulta, en breve me pondré en contacto con vos." + "</p>" +
+                                        "<p style='font-style: normal;font-weight: 400;Margin-bottom: 22px;Margin-top: 18px;font-size: 13px;line-height: 22px;font-family: 'PT Serif',Georgia,serif;color: #7c7e7f;text-align: left;' >" + nombre + ", ya recibi tu consulta, en breve me pondré en contacto con vos." + "</p>" +
                                       "</div>" +
                                       "<div style='border-radius: 3px;display: inline-block;font-size: 14px;font-weight: 700;line-height: 24px;padding: 13px 35px 12px 35px;text-align: center;text-decoration: none !important;transition: opacity 0.2s ease-in;font-family: 'PT Serif',Georgia,serif; background-color: #2b6b21; color: #ffffff;'>" +
                                          "<a href='http://aldanagonz.com'> AldanaGonz fotografia.</a>" +
@@ -159,9 +217,9 @@ namespace AGFotografia.Controllers
             SmtpClient.Send(mailAAdmin);
 
             string enviado = "enviado";
-            
 
-            return RedirectToAction("Contacto","Contacto", new { enviado });
+
+            return RedirectToAction("Contacto", "Contacto", new { enviado });
         }
 
 

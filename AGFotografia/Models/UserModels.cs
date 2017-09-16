@@ -13,6 +13,7 @@ namespace AGFotografia.Models
         {
             public string password { get; set; }
             public string usuario { get; set; }
+            public DateTime desde { get;set; }
 
         }
 
@@ -27,7 +28,7 @@ namespace AGFotografia.Models
 
                 SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
 
-                SqlCommand select = new SqlCommand("SELECT * FROM Usuarios WHERE Usuario = @usuario AND Password = @password");
+                SqlCommand select = new SqlCommand("SELECT Usuario FROM Usuarios WHERE Usuario = @usuario AND Password = @password");
                 select.Parameters.AddWithValue("@usuario", usuario);
                 select.Parameters.AddWithValue("@password", password);
                 select.Connection = conexion;
@@ -43,7 +44,7 @@ namespace AGFotografia.Models
                 if (tablaResultado.Rows.Count > 0)
                 {
                     usuarioLogueado.usuario = tablaResultado.Rows[0]["Usuario"].ToString();
-                    usuarioLogueado.password = tablaResultado.Rows[0]["Password"].ToString();
+                    //usuarioLogueado.password = tablaResultado.Rows[0]["Password"].ToString();
                 }
 
                 else
@@ -74,52 +75,82 @@ namespace AGFotografia.Models
                 }
 
             }
-        /// <summary>
-        /// Crea un Usuario nuevo, antes valida si se esta usando el mail
-        /// </summary>
-        /// <param name="nuevoUser"></param>
-        /// <returns></returns>
-        public Usuario Registro(Usuario nuevoUser)
-        {
-            SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
-
-            conexion.Open();
-            // primero valida el mail en la base de datos
-            SqlCommand consultar = conexion.CreateCommand();
-            consultar.CommandText = "SELECT * FROM Usuarios WHERE Usuario = @usuario";
-            consultar.Parameters.AddWithValue("@usuario", nuevoUser.usuario);
-
-            //meto el resultado en un string para usarlo
-            string respuesta = (string)consultar.ExecuteScalar();
-
-            //si el mail no esta en la base de datos inserta los datos
-            if (respuesta == null)
+            /// <summary>
+            /// Crea un Usuario nuevo, antes valida si se esta usando el mail
+            /// </summary>
+            /// <param name="nuevoUser"></param>
+            /// <returns></returns>
+            public Usuario Registro(Usuario nuevoUser)
             {
-                SqlCommand insert = conexion.CreateCommand();
-                insert.CommandText = "INSERT INTO Usuarios (Usuario, Password) VALUES (@usuario, @password)";
-                insert.Parameters.AddWithValue("@usuario", nuevoUser.usuario);
-                insert.Parameters.AddWithValue("@password", nuevoUser.password);
+                SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
 
-                Usuario nuevoReg = new Usuario();
-                nuevoReg.usuario = (string)insert.ExecuteScalar();
+                conexion.Open();
+                // primero valida el mail en la base de datos
+                SqlCommand consultar = conexion.CreateCommand();
+                consultar.CommandText = "SELECT 1 FROM Usuarios WHERE Usuario = @usuario";
+                consultar.Parameters.AddWithValue("@usuario", nuevoUser.usuario);
+
+                //meto el resultado en un string para usarlo
+                string respuesta = (string)consultar.ExecuteScalar();
+
+                //si el mail no esta en la base de datos inserta los datos
+                if (respuesta == null)
+                {
+                    SqlCommand insert = conexion.CreateCommand();
+                    insert.CommandText = "INSERT INTO Usuarios (Usuario, Password, Desde) VALUES (@usuario, @password, GETDATE())";
+                    insert.Parameters.AddWithValue("@usuario", nuevoUser.usuario);
+                    insert.Parameters.AddWithValue("@password", nuevoUser.password);
+
+                    Usuario nuevoReg = new Usuario();
+                    nuevoReg.usuario = (string)insert.ExecuteScalar();
 
 
-                conexion.Close();
+                    conexion.Close();
 
-                return nuevoReg;
+                    return nuevoReg;
+
+                }
+                //si el mail esta en la base devuelve null
+                else
+                {
+                    conexion.Close();
+                    return null;
+
+                }
 
             }
-            //si el mail esta en la base devuelve null
-            else
+
+            public List<Usuario> UsuariosTodos()
             {
+
+                var usuarios = new List<Usuario>();
+                SqlConnection conexion = new SqlConnection(ConfigurationManager.AppSettings["ConectionString"]);
+
+                SqlCommand select = new SqlCommand("SELECT Usuario, Desde FROM Usuarios");
+                select.Connection = conexion;
+
+                DataTable result = new DataTable();
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(select);
+            
+                adaptador.Fill(result);
+                
+                foreach (DataRow row in result.Rows)
+                {
+                    var usr = new Usuario();
+
+                    usr.usuario = (string)row["Usuario"];
+                    usr.desde = (DateTime)row["Desde"];
+
+                    usuarios.Add(usr);
+                }
+                
                 conexion.Close();
-                return null;
+
+                return usuarios;
 
             }
 
+            
         }
-
-
-    }
-      
-    }  
+}  

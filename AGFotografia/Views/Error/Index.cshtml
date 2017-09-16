@@ -1,0 +1,20 @@
+﻿@Layout = null;
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <div class="right-content">
+        <img class="img-responsive" src="~/Content/img/UPS, ALGO SALIO MAL.jpg" title="UPS, ALGO SALIO MAL"/>
+        @if (ViewBag.Mensaje != null)
+        {
+            <span style="color:red"> @ViewBag.Mensaje </span>
+        }
+
+
+    </div>
+</body>
+</html>

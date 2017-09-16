@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Aldana Gonzalez Fotografia" />
@@ -14,78 +14,91 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/otros")
     @Styles.Render("~/Content/css")
+
+    @*@Styles.Render("~/Theme/switch.color")*@
+    <link href="~/Content/switch.color.css" rel="stylesheet" />
+   
+    @{
+        var color = System.Configuration.ConfigurationManager.AppSettings["Color.Theme"];
+
+        if (color != null)
+        {
+            @Styles.Render("~/Theme/" + color)
+        }
+    }
+
     @RenderSection("style", required: false)
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+
+
+
+    <script src = "https://code.jquery.com/jquery-1.12.4.min.js"
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous"></script>
 </head>
 <body >
-    <!--  PRELOADER  -->
-    <img id="preloader" alt="" src="~/Content/img/loading.gif" style="opacity: 0; display: none;">
-    <!--  //PRELOADER  -->
 
     <!--  LEFT MENU  -->
     <div class="left-menu" style="opacity: 1;">
         <!--  LOGO  -->
         <a class="logo hvr-wobble-horizontal" href="@Url.Action("Index", "Home")">
-            <span class="ion-camera" style="color:red;"></span>
-            <span id="marca">Aldana Gonz</span>
+            <span class="ion-camera"></span>
+            <span id = "marca" > Aldana Gonz</span>
         </a>
         <!--  //LOGO  -->
 
         <!--  NAVIGATION  -->
         <nav class="main-navi">
             <ul>
-                @if (Session["usuario"] != null)
+                @if (Session["Admin"] != null)
                 {
                     <li style="list-style:none;">
-                        <a href="@Url.Action("Admin","Home")">
-                            Admin
-                            <span class="dot"></span>
+                         <a href="@Url.Action("Dashboard", "Admin")" >
+                                Dashboard
+                                <span class="dot"></span>
                             <span class="corner"></span>
                         </a>
                     </li>
                 }
-                <li style="list-style:none;">
-                    <a href="@Url.Action("Index","Home")">
+                <li style = "list-style:none;" >
+                    <a href="@Url.Action("Index", "Home")">
                         Home
                         <span class="dot"></span>
                         <span class="corner"></span>
                     </a>
                 </li>
-                <li id="portfolioLink" style="list-style:none;">
+                <li id="portfolioLink"  style="list-style:none;">
                     <a href="@Url.Action("Index","Portfolio")">
                         Portfolio
                         <span class="dot"></span>
                         <span class="corner"></span>
                     </a>
                 </li>
-                <li style="list-style:none;">
-                    <a href="@Url.Action("SobreMi","SobreMi")">
+                <li style="list-style:none;" >
+                    <a href="@Url.Action("SobreMi", "SobreMi")">
                         Sobre mi
                         <span class="dot"></span>
                         <span class="corner"></span>
                     </a>
                 </li>
-                <li style="list-style:none;">
-                    <a href="@Url.Action("Contacto","Contacto")">
+                <li style = "list-style:none;" >
+                    <a href="@Url.Action("Contacto", "Contacto")">
                         Contacto
                         <span class="dot"></span>
                         <span class="corner"></span>
                     </a>
                 </li>
             </ul>
-            <em id="showHideMenu" class="show-hide-menu ion-android-menu" href=""></em>
+            <em id = "showHideMenu" class="show-hide-menu ion-android-menu" href=""></em>
         </nav>
         <!--  //NAVIGATION  -->
         <!--  SOCIAL ICONS  -->
- 
+
         <div class="soc-icons">
-            <a class="mini hvr-buzz" href="http://san-leon.com/" target="_blank" style="font-size:12px;">Diseño SanLeon 2016-@DateTime.Today.Year</a>
+            <a class="mini hvr-buzz" href="https://bcariaga.github.io/san-leon/" target="_blank" style="font-size:12px;">Diseño SanLeon 2016-@DateTime.Today.Year</a>
             @*<a class="ion-social-twitter" href="twitter.com"></a>*@
             @*<a class="ion-social-facebook" href="https://www.facebook.com/aldu.g.fotografia/"></a>*@
             @*<a class="ion-social-googleplus" href="google.com"></a>*@    
-            <a class="ion-ios-cog-outline" href="@Url.Action("Ingresar","Usuario")"></a>
+            <a class="ion-ios-cog-outline" href="@Url.Action("Ingresar", "Usuario")"></a>
             
         </div>
         
@@ -100,9 +113,25 @@
    
     @RenderSection("scripts", required: false)
 
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-js")
     @Scripts.Render("~/bundles/otros")
 
+    
+    @{
+
+        if (Session["invitado"] == null)
+        {
+            <script>
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("NuevoUser", "Home")",
+                });
+            </script>
+        }
+
+    }
+    
+    
    
 </body>
 </html>

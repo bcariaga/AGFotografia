@@ -30,14 +30,14 @@ namespace AGFotografia.Controllers
                         Request.QueryString["oauth_verifier"]);
                     FlickrManager.OAuthToken = accessToken;
 
-                    mensaje = "You successfully authenticated as " + accessToken.FullName;
+                    mensaje = "Ingresaste con el usuario: " + accessToken.Username;
                     resultado = Resultado.success;
 
                     Session["Flickr"] = true;
                 }
                 catch (OAuthException ex)
                 {
-                    mensaje = "An error occurred retrieving the token : " + ex.Message;
+                    mensaje = "An error occurred retrieving the token : " + ex.Message + "(Avisale a Braian)";
                     resultado = Resultado.error;
 
                 }
@@ -46,28 +46,38 @@ namespace AGFotografia.Controllers
             ViewBag.Mensaje = mensaje;
             ViewBag.LoginFlickr = resultado;
 
-            return RedirectToAction("Admin", "Home", new { mensaje = mensaje });
+            return RedirectToAction("Dashboard", "Admin", new { mensaje = mensaje });
             //return View();
         }
 
         public void FlickrAuth()
         {
-            UrlHelper u = new UrlHelper(this.ControllerContext.RequestContext);
-            string authResponse = Request.Url.GetLeftPart(UriPartial.Authority) + u.Action("AuthResponse", "Flickr");
+
+            if (! (Session["Admin"] == null) )
+            {
+                UrlHelper u = new UrlHelper(this.ControllerContext.RequestContext);
+                string authResponse = Request.Url.GetLeftPart(UriPartial.Authority) + u.Action("AuthResponse", "Flickr");
 
 
-            Flickr f = FlickrManager.GetInstance();
-            OAuthRequestToken token = f.OAuthGetRequestToken(authResponse);
+                Flickr f = FlickrManager.GetInstance();
+                OAuthRequestToken token = f.OAuthGetRequestToken(authResponse);
 
-            Session["RequestToken"] = token;
+                Session["RequestToken"] = token;
 
-            string url = f.OAuthCalculateAuthorizationUrl(token.Token, AuthLevel.Write);// redireccionar bien al otro metodo.
-            Response.Redirect(url);
+                string url = f.OAuthCalculateAuthorizationUrl(token.Token, AuthLevel.Write);// redireccionar bien al otro metodo.
+                Response.Redirect(url);
+            }
+            
         }
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
+
+            if (Session["Admin"] == null || Request.Cookies["OAuthToken"] == null)
+            {
+                return Json(new { succes = false, mensaje = "se requiere autenticacion." },JsonRequestBehavior.AllowGet);
+            }
 
             var f = FlickrManager.GetAuthInstance();
             //f.OnUploadProgress += new EventHandler<FlickrNet.UploadProgressEventArgs>(Flickr_OnUploadProgress);

@@ -60,19 +60,19 @@ strong{
 		border-bottom: 1px solid #212121;
 		font-size: 15px;
 	    font-weight: 900;
-	    color: #fff;
+	    /*color: #fff;*/
 	    letter-spacing: 3px;
 	    text-transform: uppercase;
 	}
 		.logo em:before {
-		    color: #ff3333;
+		    /*color: #ff3333;*/
 		    font-size: 26px;
 		    position: relative;
 		    top: 3px;
 		}
-	.logo:hover{
+	/*.logo:hover{
 		color: #fff;
-	}
+	}*/
 	/*----------  //LOGO  ----------*/
 
 	/*----------  NAVIGATION  ----------*/
@@ -300,7 +300,6 @@ strong{
 	margin-left: 280px;
 	position: relative;
 	height: 100%;
-	opacity: 0;
 
     -moz-transition: all 0.3s linear;
 	-webkit-transition: all 0.3s linear;
@@ -330,23 +329,8 @@ strong{
 	.home-page.animate{
 		top: -100%;
 	}
-	.home-page .mbYTP_wrapper{
-		left: 280px !important;
-	}
-	.home-page .mbYTP_wrapper:before{
-		content: "";
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		background: url(../images/video_grig.png);
-		z-index: 1;
-	}
-	#controlBar_bgndVideo{
-		display: none !important;
-	}
-	.flexslider.video-slider .slides {
+	
+	/*.flexslider.video-slider .slides {
 	    bottom: 0;
 	    left: 280px;
 	    position: absolute !important;
@@ -379,7 +363,7 @@ strong{
 	.home-page.flexslider .slides > li.flex-active-slide:before {
 	    width: 100%;
 	    transition: all 4s linear 1s;
-	}
+	}*/
 	/*----------  //HOME BIG IMAGE  ----------*/
 
 	/*----------  SLIDER  ----------*/
@@ -394,7 +378,7 @@ strong{
 	/*----------  //SLIDER  ----------*/
 
 	/*----------  CIRCLE  ----------*/
-	.circle{
+	/*.circle{
 		border-radius: 50%;
 		height: 880px;
 		width: 880px;
@@ -430,76 +414,117 @@ strong{
 	}
 	.circle:before:hover{
 		background: rgba(0,0,0,0.35);
-	}
+	}*/
+/*----------  CIRCLE  ----------*/
+.circle {
+    border-radius: 50%;
+    height: 880px;
+    width: 880px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -440px 0 0 -440px;
+    text-align: center;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -o-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    box-sizing: content-box;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+    .circle:before {
+        border: 4px solid #ff3333;
+        border-radius: 50%;
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
+
+    .circle:before:hover {
+        background: rgba(0,0,0,0.35);
+    }
 
 
-		/*----------  HOME TITLE  ----------*/
-		.home-title{
-			font-size: 90px;
-			line-height: 90px;
-			font-weight: 300;
-			margin-top: 320px;
-			color: #fff;
-			text-transform: uppercase;
-			opacity: 0;
 
-		    -moz-transition: all 1s linear 0.6s;
-			-webkit-transition: all 1s linear 0.6s;
-			-o-transition: all 1s linear 0.6s;
-			-ms-transition: all 1s linear 6s;
-			transition: all 1s linear 0.6s;
-		}
-		.flex-active-slide .home-title{
-			opacity: 1;
-		}
-		.home-title span{
-			display: block;
+/*----------  HOME TITLE  ----------*/
+.home-title {
+    font-size: 90px;
+    line-height: 90px;
+    font-weight: 300;
+    margin-top: 320px;
+    color: #fff;
+    text-transform: uppercase;
+    opacity: 0;
+    -moz-transition: all 1s linear 0.6s;
+    -webkit-transition: all 1s linear 0.6s;
+    -o-transition: all 1s linear 0.6s;
+    -ms-transition: all 1s linear 6s;
+    transition: all 1s linear 0.6s;
+}
 
-		    -moz-transition: all 0.5s linear;
-			-webkit-transition: all 0.5s linear;
-			-o-transition: all 0.5s linear;
-			-ms-transition: all 0.5s linear;
-			transition: all 0.5s linear;
-		}
-		.home-title strong{
-			font-weight: 900;
-		}
-		.home-title p{
-			margin-top: 18px;
-			font-size: 19px;
-			font-weight: 900;
-			line-height: 19px;
-			letter-spacing: 2px;
+.flex-active-slide .home-title {
+    opacity: 1;
+}
 
-		    -moz-transition: all 0.5s linear;
-			-webkit-transition: all 0.5s linear;
-			-o-transition: all 0.5s linear;
-			-ms-transition: all 0.5s linear;
-			transition: all 0.5s linear;
-		}
-		/*----------  //HOME TITLE  ----------*/
+.home-title span {
+    display: block;
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
 
-		/*----------  HOME BUTTON  ----------*/
-		.button-down{
-			width: 120px;
-			height: 120px;
-			background: #ff3333;
-			font-size: 60px;
-			line-height: 120px;
-			text-align: center;
-			border-radius: 50%;
-			color: #fff;
-			margin-top: 100px;
-			position: relative;
-			z-index: 2;
-		}	
-		.button-down:hover{
-			width: 140px;
-			height: 140px;
-			line-height: 140px;
-			margin-top: 90px;
-			color: #fff;
-		}
+.home-title strong {
+    font-weight: 900;
+}
+
+.home-title p {
+    margin-top: 18px;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 19px;
+    letter-spacing: 2px;
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+/*----------  //HOME TITLE  ----------*/
+
+/*----------  HOME BUTTON  ----------*/
+.button-down {
+    width: 120px;
+    height: 120px;
+    background: #ff3333;
+    font-size: 60px;
+    line-height: 120px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+    .button-down:hover {
+        width: 140px;
+        height: 140px;
+        line-height: 140px;
+        margin-top: 90px;
+        color: #fff;
+    }
 		/*----------  //HOME BUTTON  ----------*/
 	/*----------  //CIRCLE  ----------*/
 /*----------  //RIGHT CONTENT  ----------*/
@@ -563,7 +588,7 @@ strong{
 	    top: 0;
 	    width: 100%;
 	    cursor: pointer;
-		box-shadow: inset 0 0 0 0 #ff3333;
+		/*box-shadow: inset 0 0 0 0 #ff3333;*/
 
 	    -moz-transition: all 0.2s linear;
 		-webkit-transition: all 0.2s linear;
@@ -703,11 +728,11 @@ strong{
 		-ms-transition: all 0.3s linear;
 		transition: all 0.3s linear;
 	}
-	.masonry-wrapper .item:hover a,
+	/*.masonry-wrapper .item:hover a,
 	.right-images li:hover a,
 	.portfolio.column li:hover a{
 		box-shadow: inset 0 0 0 4px #ff3333;
-	}
+	}*/
 	.masonry-wrapper .item:hover a img,
 	.right-images li:hover a img,
 	.portfolio.column li:hover a img{
@@ -949,7 +974,7 @@ strong{
 }
 	.about .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}
 
 	/*----------  CLIENTS LOGO  ----------*/
@@ -999,7 +1024,7 @@ strong{
 }
 	.service .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}
 	.service .flex-control-nav{
 		display: block;
@@ -1098,7 +1123,7 @@ strong{
 }
 	.contact .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}
 	input[type="text"] {
 		border: 2px solid #ccc;
@@ -1312,7 +1337,7 @@ strong{
 }
 	.blog .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}
 	.blog .left-content-text{
 		padding-top: 30px;
@@ -1434,7 +1459,7 @@ strong{
 }
 	.blog-single .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}	
 .blog-title{
 	position: relative;
@@ -1475,7 +1500,7 @@ strong{
 }
 	.blog-comments .scroller{
 		display: inline-block;
-		width: 100%:;
+		width: 100%;
 	}	
 	.blog-comments .left-content-text{
 		padding-top: 40px;

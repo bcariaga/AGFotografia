@@ -25,21 +25,6 @@ namespace AGFotografia.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Editar(FormCollection formulario)
-        {
-            SobreMi datosEditados = new SobreMi();
-            datosEditados.Texto1 = formulario["texto1"];
-            datosEditados.Texto2 = formulario["texto2"];
-            datosEditados.Texto3 = formulario["texto3"];
-            datosEditados.Portada = formulario["portada"];
-            datosEditados.Titulo = formulario["titulo"];
-            datosEditados.Subtitulo = formulario["subtitulo"];
-
-            SobreMiManager sobreMi = new SobreMiManager();
-            sobreMi.Editar(datosEditados);
-
-            return RedirectToAction("SobreMi");
-        }
+        
     }
 }

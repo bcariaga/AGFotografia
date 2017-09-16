@@ -78,29 +78,42 @@ namespace AGFotografia.Models
                                                     "FROM Albunes A " +
                                                     "ORDER BY A.ID");
 
-            consulta.Connection = conexion;
-
-            DataTable tabla = new DataTable();
-
-            SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
-
-            adaptador.Fill(tabla);
-
-            foreach (DataRow fila in tabla.Rows)
+            try
             {
-                AlbumFill album = new AlbumFill();
-                album.ID = (int)fila["ID"];
-                album.Titulo = fila["Titulo"].ToString();
-                album.Tags = fila["Tags"].ToString();
-                album.Portada = fila["Portada"].ToString();
+                consulta.Connection = conexion;
 
-                albunes.Add(album);
+                DataTable tabla = new DataTable();
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
+
+                adaptador.Fill(tabla);
+
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    AlbumFill album = new AlbumFill();
+                    album.ID = (int)fila["ID"];
+                    album.Titulo = fila["Titulo"].ToString();
+                    album.Tags = fila["Tags"].ToString();
+                    album.Portada = fila["Portada"].ToString();
+
+                    albunes.Add(album);
+                }
+                //lleno las fotos de los albunes
+                foreach (AlbumFill album in albunes)
+                {
+                    album.Fotos = fm.Consultar(album.ID);
+                }
             }
-            //lleno las fotos de los albunes
-            foreach (AlbumFill album in albunes)
+            catch (Exception)
             {
-                album.Fotos = fm.Consultar(album.ID);
+
+                throw;
             }
+            finally {
+
+                conexion.Close();
+            }
+
 
             return albunes;
         }
@@ -118,9 +131,9 @@ namespace AGFotografia.Models
             SqlCommand consulta = new SqlCommand("SELECT  A.ID" +
                                                         ",A.Titulo" +
                                                         ",A.Tags" +
-                                                        ",A.Portada" +
-                                                    "FROM Albunes A" +
-                                                    "WHERE A.ID=@ID" +
+                                                        ",A.Portada " +
+                                                    "FROM Albunes A " +
+                                                    "WHERE A.ID=@ID " +
                                                     "ORDER BY A.ID");
             consulta.Parameters.AddWithValue("@ID", id);
 

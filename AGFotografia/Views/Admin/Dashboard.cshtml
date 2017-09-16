@@ -1,0 +1,978 @@
+﻿@section style{
+<style>
+    .check{
+        opacity:0.3;
+    }
+
+    #carga {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1051;
+        background-color: rgba(169, 68, 66, 0.43);
+    }
+
+    #carga > img {
+        top:50%;        
+        right:50%;        
+        position: absolute;
+    }
+</style>
+
+}
+
+
+
+@{
+    ViewBag.Title = "Admin";
+    /*Albunes*/
+    List<AGFotografia.Models.AlbumFill> Albunes = ViewBag.Albunes;
+    int TotalFotos = 0;
+    foreach (var album in Albunes)
+    {
+        TotalFotos += album.Fotos.Count;
+    };
+    int TotalAlbunes = Albunes.Count;
+
+    /*Usuarios*/
+    List<AGFotografia.Models.Usuario> Usuarios = ViewBag.Usuarios;
+
+    /*Portadas*/
+    List<AGFotografia.Models.Portada> Portadas = ViewBag.Portadas;
+
+    /*Ingresos*/
+    AGFotografia.Models.IngresoDatos Ingresos = ViewBag.Ingresos;
+
+    /*Sobre Mi*/
+    AGFotografia.Models.DatosContacto Contacto = ViewBag.Contacto;
+    
+    /*Contacto*/
+    AGFotografia.Models.SobreMi SobreMi = ViewBag.SobreMi;
+
+    @model AGFotografia.Models.AlbumFill
+}
+
+<div class="right-content">
+    <div id="carga" style="display:none;width:100%;height:100%;overflow:hidden">
+        <img src="~/Content/img/animal.gif" alt="El gato negro de la carga" /> 
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="jumbotron">
+            <h1>Hola! ¿que vamos a cambiar?</h1>
+            <p id="mensajeControlFlickr">
+                Para editar los Albunes necesitas <a href="@Url.Action("FlickrAuth","Flickr")">logear Flickr </a>.
+            </p>
+        </div>
+        <div class="col-md-8 col-sm-8" id="opciones">
+            <div class="panel-group" id="menu" role="tablist" aria-multiselectable="true">
+                @* Albunes *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-one">
+                         <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#menu" href="#menu-one" aria-expanded="true" aria-controls="menu-one">
+                                Albunes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-one">
+                        <div class="panel-body">
+                            <div class="pull-right">
+                                <button class="btn btn-success btn-xs controlAlbum" data-toggle="modal" data-target="#nuevoAlbum">Crear Nuevo <i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                            <p>Actualente hay <span class="text-info"> @Albunes.Count</span> albunes creados.</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Titulo</th>
+                                        <th>Nro Fotos</th>
+                                        <th>Tags</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    @foreach (var item in Albunes)
+                                    {
+                                        <tr id="tr_@item.ID">
+                                            <td>@item.ID</td>
+                                            <td>@item.Titulo</td>
+                                            <td>@item.Fotos.Count()</td>
+                                            <td>@item.Tags</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-xs controlAlbum" data-toggle="modal" data-target="#albumModal_@item.ID">Editar <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                <button class="btn btn-danger btn-xs controlAlbum" onclick="borrarAlbum(event,@item.ID)">Borrar <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* Paginas *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-four">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-four" aria-expanded="false" aria-controls="menu-four">
+                                Paginas
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-four" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-four">
+                        <div class="panel-body">
+                            <div>
+                                <button class="btn btn-primary cookieControl" data-toggle="modal" data-target="#sobreMi">Sobre Mi <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary cookieControl" data-toggle="modal" data-target="#contacto">Contacto <i class="fa fa-address-card" aria-hidden="true"></i></button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* Users *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-two">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-two" aria-expanded="false" aria-controls="menu-two">
+                                Usuarios
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-two">
+                        <div class="panel-body">
+                            <p>Tenes @Usuarios.Count cuentas de usuario, cuanto menos tengas mejor!.</p>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Fecha de creación</th>
+                                    </tr>
+                                    @foreach (var usr in Usuarios)
+                                    {
+                                        <tr>
+                                            <td>@usr.usuario</td>
+                                            <td>@usr.desde.ToLocalTime()</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* Extras *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="menu-heading-three">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#menu" href="#menu-three" aria-expanded="false" aria-controls="menu-three">
+                                Extras
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="menu-three" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu-heading-three">
+                        <div class="panel-body">
+                            <div>
+                                <button class="btn btn-primary cookieControl" data-toggle="modal" data-target="#portadas">Cambiar Portadas <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#colorPicker">Theme <i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="estadisticas" class="col-md-4 col-sm-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Visitas</div>
+                <div class="panel-body">
+                    <p>Desde el principio: @Ingresos.IngresosHistorico</p>
+                    <p>Ultimo Mes : @Ingresos.IngresoMes</p>
+                    <p>Ultima Semana: @Ingresos.IngresosSemana</p>
+                    <p>Hoy : @Ingresos.IngresosDia</p>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Fotos</div>
+                <div class="panel-body">
+                    <p>Albunes : @TotalAlbunes</p>
+                    <p>Fotos: @TotalFotos</p>
+                </div>
+            </div>
+        </div>
+        <!-- ColorPicker-->
+        <div class="modal fade" id="colorPicker" tabindex="-1" role="dialog" aria-labelledby="colorPicker-label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="colorPicker-label">Color de Énfasis</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="color-picker media">
+                            <div class="pwrapper">
+                                <!--  COLOR  -->
+                                <div data-color="turquoise" class="picker-turquoise color"></div>
+                                <div data-color="purple" class="picker-purple color"></div>
+                                <div data-color="pink" class="picker-pink color"></div>
+                                <div data-color="green" class="picker-green color"></div>
+                                <div data-color="yellow" class="picker-yellow color"></div>
+                                <div data-color="red" class="picker-red color"></div>
+                                <div data-color="blue" class="picker-blue color"></div>
+                                <div data-color="lightgreen" class="picker-lightgreen color"></div>
+                                <div data-color="lightred" class="picker-lightred color"></div>                                
+                                <!--  //COLOR  -->
+                            </div>
+                        </div>
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Escucha!</strong> Cuando cambien el color te va a deslogear, no te asustes, esta bien.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="guardarColor">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Portadas Modal-->
+        <div class="modal fade" id="portadas" tabindex="-1" role="dialog" aria-labelledby="portadas-label">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="portadas-label">Portadas</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#portada_1" data-toggle="tab" role="tab">Portada 1</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#portada_2" data-toggle="tab" role="tab">Portada 2</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#portada_3" data-toggle="tab" role="tab">Portada 3</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content" id="portadas_tabs">
+                            @foreach (AGFotografia.Models.Portada portada in ViewBag.Portadas)
+                            {
+
+                                <div role="tabpanel" class="tab-pane" id="portada_@portada.ID">
+                                    <h3>Portada @portada.ID</h3>
+                                    <form method="post" role="form" enctype="multipart/form-data" id="form_@portada.ID" class="portadaForm">
+                                        <input type="hidden" value="@portada.ID" name="ID" readonly />
+                                        <div class="form-group">
+                                            <label class="control-label" for="textoPortada_@portada.ID">Texto Portada:</label>
+                                            <input class="form-control" type="text" value="@portada.Texto" id="textoPortada_@portada.ID" name="Texto" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="portadaFile_@portada.ID">Imagen Portada:</label>
+                                            <input class="form-control" type="file" id="portadaFile_@portada.ID" name="portadaFile" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="srcPortada_@portada.ID">SRC de la Portada:</label>
+                                            <input class="form-control" type="text" value="@portada.SRC" id="srcPortada_@portada.ID" name="SRC" />
+                                        </div>
+                                    </form>
+                                </div>
+
+                            }
+                        </div>
+                                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="guardarPortadas">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Portadas Modal-->
+
+        @* Albunes *@
+        <div>
+            @foreach (var item in Albunes)
+            {
+                <div class="modal fade" id="albumModal_@item.ID" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Editar Album @item.Titulo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#datosBasicos_@item.ID" role="tab" data-toggle="tab">Datos Basicos</a></li>
+                                    <li role="presentation"><a href="#agregarFotos_@item.ID" role="tab" data-toggle="tab">Agregar Fotos</a></li>
+                                    <li role="presentation"><a href="#borrarFotos_@item.ID"  role="tab" data-toggle="tab">Borrar Fotos</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    @* Datos Basicos *@
+                                    <div role="tabpanel" class="tab-pane active" id="datosBasicos_@item.ID">
+                                        <form name="editarAlbumFill" class="formDatosBasicos" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="ID" value="@item.ID" />
+                                            <div class="form-group">
+                                                <label class="control-label" >Titulo:</label>
+                                                <input name="Titulo" type="text" class="form-control" placeholder="Titulo" value="@item.Titulo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Tags:</label>
+                                                <input name="Tags" type="text" class="form-control" placeholder="Tags" value="@item.Tags">
+                                            </div>
+                                            <div class="form-group-sm">
+                                                <label class="control-label">Portada</label>
+                                                <input class="portadaFile" type="file" name="portadaFile">
+                                            </div>
+                                            <div class="form-group-sm">
+                                                <label class="control-label">Portada</label>                                               
+                                                <input type="text" name="Portada" class="form-control" placeholder="Portada" value="@item.Portada">
+                                            </div>
+                                            <hr />
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-xs btn-success editarAlbum">Listo!</button>  
+                                            </div>
+                                            <br />
+                                            
+                                        </form>
+                                    </div>
+                                    @* Agregar Fotos *@
+                                    <div role="tabpanel" class="tab-pane" id="agregarFotos_@item.ID">
+                                        <form method="post">
+                                            <input type="hidden" name="albumId" value="@item.ID" />
+                                            <div class="form-group">
+                                                <label> Fotos: </label>
+                                                <input type="file" name="FotoFiles" multiple="multiple">
+                                            </div>
+                                            <span>O a la antigua:</span>
+                                            <button class="btn btn-xs btn-info agregarInputs" > Agregar   <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                            <div class="well">
+                                                <div class="contenedor">
+                                                    <div class="added">
+                                                        <input type="text" placeholder="SRC foto 1" name="srcFotos" id="campo_1" />
+                                                        <a href="#" class="eliminar-input btn btn-xs btn-danger">
+                                                            Borrar
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-xs btn-success agregarFotos">Listo!</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @* Borrar Fotos *@
+                                    <div role="tabpanel" class="tab-pane" id="borrarFotos_@item.ID">
+                                        <div>Selecciona las fotos que quieras borrar:</div>
+                                        <div class="media">
+                                            @foreach (AGFotografia.Models.Foto foto in item.Fotos)
+                                            {
+
+                                                var src = String.IsNullOrEmpty(foto.Miniatura) ? foto.SRC : foto.Miniatura;
+
+                                            <div class="col-md-3">
+                                                <label class="btn btn-default">
+                                                    <img src="@src" alt="AG Fotografia foto: @foto.ID" class="img-check img-thumbnail imagenBorrar" data-imagenID="@foto.ID">
+
+                                                </label>
+                                            </div>
+                                            }
+                                        </div>
+                                        <hr />
+                                        <div class="pull-right">
+                                            <button onclick="borrarFotos()" class="btn btn-xs btn-danger">Borrar</button>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+ 
+        </div>
+
+        <!--Modal nuevo album-->
+        <div class="modal fade" id="nuevoAlbum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Nuevo Album</h4>
+                    </div>
+                    <div class="modal-body">
+                        @* Datos Basicos *@
+                        <form name="newAlbum" method="post" id="nuevoAlbumForm" enctype="multipart/form-data">
+                            <input type="hidden" name="ID" value="nuevoAlbum" />
+                            <div role="tabpanel" class="tab-pane active" id="datosBasicos_nuevoAlbum">
+                                <div class="form-group">
+                                    <label class="control-label">Titulo:</label>
+                                    <input name="Titulo" type="text" class="form-control" placeholder="Titulo" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Tags:</label>
+                                    <input name="Tags" type="text" class="form-control" placeholder="Tags" value="">
+                                </div>
+                                <div class="form-group-sm">
+                                    <label class="control-label">Portada</label>
+                                    <input class="portadaFile" type="file" name="portadaFile">
+                                </div>
+                                <div class="form-group-sm">
+                                    <label class="control-label">Portada</label>
+                                    <input type="text" name="Portada" class="form-control" placeholder="Portada" value="">
+                                </div>
+                                <hr />
+                                <br />
+                            </div>
+                            @* Agregar Fotos *@
+                            <div role="tabpanel" class="tab-pane" id="agregarFotos_nuevoAlbum">
+                                    
+                                <div class="form-group">
+                                    <label> Fotos: </label>
+                                    <input type="file" name="FotoFiles" multiple="multiple">
+                                </div>
+                                <span>O a la antigua:</span>
+                                <button class="btn btn-xs btn-info agregarInputs"> Agregar   <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <div class="well">
+                                    <div class="contenedor">
+                                        <div class="added">
+                                            <input type="text" placeholder="SRC foto 1" name="srcFotos" id="campo_1" />
+                                            <a href="#" class="eliminar-input btn btn-xs btn-danger">
+                                                Borrar
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="agregarAlbum"  class="btn btn-xs btn-success">Listo!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--fin nuevo album-->
+
+        <!--Modal Sobre Mi-->
+        <div class="modal fade" id="sobreMi" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Sobre Mi</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="sobreMiForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label">Titulo:</label>
+                                <input name="Titulo" type="text" class="form-control" placeholder="Titulo" value="@SobreMi.Titulo">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Subtitulo:</label>
+                                <input name="Subtitulo" type="text" class="form-control" placeholder="Subtitulo" value="@SobreMi.Subtitulo">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Texto1:</label>
+                                <input name="Texto1" type="text" class="form-control" placeholder="Texto1" value="@SobreMi.Texto1">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Texto2:</label>
+                                <input name="Texto2" type="text" class="form-control" placeholder="Texto2" value="@SobreMi.Texto2">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Texto3:</label>
+                                <input name="Texto3" type="text" class="form-control" placeholder="Texto3" value="@SobreMi.Texto3">
+                            </div>
+                            <div class="form-group-sm">
+                                <label class="control-label">Portada</label>
+                                <input class="portadaFile" type="file" name="portadaFile">
+                            </div>
+                            <div class="form-group-sm">
+                                <label class="control-label">Portada</label>
+                                <input type="text" name="Portada" class="form-control" placeholder="Portada" value="@SobreMi.Portada">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="submitSobreMi" class="btn btn-xs btn-success">Listo!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal Contacto-->
+        <div class="modal fade" id="contacto" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Contacto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" id="contactoForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label">Titulo:</label>
+                                <input name="Titulo" type="text" class="form-control" placeholder="Titulo" value="@Contacto.Titulo">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Subtitulo:</label>
+                                <input name="Subtitulo" type="text" class="form-control" placeholder="Subtitulo" value="@Contacto.Subtitulo">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Telefono:</label>
+                                <input name="Tel" type="text" class="form-control" placeholder="Telefono" value="@Contacto.Tel">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email:</label>
+                                <input name="Email" type="email" class="form-control" placeholder="Email" value="@Contacto.Email">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Facebook:</label>
+                                <input name="Facebook" type="text" class="form-control" placeholder="Facebook" value="@Contacto.Facebook">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Flickr:</label>
+                                <input name="Flickr" type="text" class="form-control" placeholder="Flickr" value="@Contacto.Flickr">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Texto1:</label>
+                                <input name="Texto1" type="text" class="form-control" placeholder="Texto1" value="@Contacto.Texto1">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Texto2:</label>
+                                <input name="Texto2" type="text" class="form-control" placeholder="Texto2" value="@Contacto.Texto2">
+                            </div>
+                            <div class="form-group-sm">
+                                <label class="control-label">Portada</label>
+                                <input class="portadaFile" type="file" name="portadaFile">
+                            </div>
+                            <div class="form-group-sm">
+                                <label class="control-label">Portada</label>
+                                <input type="text" name="Portada" class="form-control" placeholder="Portada" value="@Contacto.Portada">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="submitContact" class="btn btn-xs btn-success">Listo!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @* resuleve el tema de las notificaciones *@
+<script src="~/Scripts/bootstrap-notify.js"></script>    
+    
+
+
+<script type="text/javascript">
+
+    $('#portada_1').addClass("active");
+    $('#portadas a').click(function (e) {
+        e.preventDefault();
+        $($(this).attr("href")).tab('show');
+    })
+
+
+    $(".agregarInputs").on("click", function (e) {
+        e.preventDefault();
+        var contenedor = $(this).next("div").find(".contenedor");
+        agregarInputs(contenedor);
+
+    });
+
+    function pantallaCarga(animar) {
+        var carga = $('#carga');
+
+        var mensajes = [
+            "☻ No, no se travo...",
+            "Un ratito mas...",
+            "Tu internet apesta... ♿",
+            "Esto va a tardar un poco mas...",
+            "...",
+            "Carganding...",
+            "⚓ Dale tiempo al tiempo...",
+            "Revisate el Facebook mientras...",
+            "La magia de la programación trasciende el tiempo... ⚡",
+            "Ponele que anda...",
+            "¿No tenes nada en el fuego?",
+            "Espero no estes apurada...",
+            "Preparate algo para tomar mientras ☕"
+        ]
+
+        if (carga.is(':visible')) {
+            carga.hide();
+        } else {
+            carga.show();
+            if (animar) {
+                mostrarMensaje("Esto puede tardar un rato.", "info");
+                var interval;
+                interval = setInterval(function () {
+                    if ( carga.is(':visible') ){
+                        var msj = mensajes[Math.floor(Math.random() * (mensajes.length))];
+                        mostrarMensaje(msj, "info");
+                    } else {
+                        clearInterval(interval)
+                    }
+                },15000)
+                
+            }
+        }
+    }
+
+
+    $(".eliminar-input").on("click", function (e) { //click en eliminar campo
+        $(this).parent('div').remove(); //eliminar el campo
+        e.preventDefault();
+    });
+
+
+    $('#agregarAlbum').on('click', function (e) {
+        pantallaCarga(true);
+
+        var formData = new FormData($("#nuevoAlbumForm")[0]);
+        $.ajax({
+            processData: false,
+            contentType: false,
+            url: "@Url.Action("InsertarAlbumNew", "Portfolio")",
+            type: "post",
+            data: formData,
+        }).done(function (r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+                mostrarMensaje('<a target="_blank" href="https://youtu.be/MfXVG8o41RQ">actualiza la pagina para verlo, <strong>Que Trucazo, no?</strong> ;)</a>', "info");
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+        e.preventDefault();
+
+    });
+
+    $('#submitContact').on('click', function (e) {
+        pantallaCarga();
+
+        var formData = new FormData($("#contactoForm")[0]);
+        $.ajax({
+            processData: false,
+            contentType: false,
+            url: "@Url.Action("ContactEdit", "Admin")",
+            type: "post",
+            data:  formData,
+        }).done(function (r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+        e.preventDefault();
+    });
+
+    $('#submitSobreMi').on('click', function (e) {
+        pantallaCarga();
+
+        var formData = new FormData($("#sobreMiForm")[0]);
+        $.ajax({
+            processData: false,
+            contentType: false,
+            url: "@Url.Action("SobreMiEdit", "Admin")",
+            type: "post",
+            data:  formData,
+        }).done(function (r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+        e.preventDefault();
+    });
+
+    $(".editarAlbum").on("click", function (e) {
+        e.preventDefault();
+
+        pantallaCarga();
+
+        var formData = new FormData($(this).closest("form")[0]);
+
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: "/Portfolio/EditarAlbumJsonResult",
+            data: formData
+        }).done(function(r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+
+        }).fail(function(r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+    });
+
+    $(".agregarFotos").on("click", function (e) {
+        e.preventDefault();
+
+        pantallaCarga();
+
+        var formData = new FormData($(this).closest("form")[0]);
+
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: "/Portfolio/AgregarFotos",
+            data: formData
+        }).done(function (r) {
+            console.log(r);
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "warning")
+        }).always(function () {
+            $(this).removeClass("disabled");
+            pantallaCarga();
+        });
+    });
+    //lo marco com editado
+    $(".portadaForm :input").change(function (e) {
+        $(e.target.form).data("changed", true);
+    });
+
+    $("#guardarPortadas").on("click", function (e) {
+        e.preventDefault();
+        $('.portadaForm').each(function (index, elem) {
+            $elem = $(elem)
+            if ($elem.data("changed")) {
+                pantallaCarga();
+                var formData = new FormData($elem[0]);
+                $.ajax({
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    url: "/Admin/EditarPortada",
+                    data: formData
+                }).done(function (r) {
+                    if (r.resultado === 0) {
+                        mostrarMensaje(r.mensaje, "success")
+                    } else {
+                        mostrarMensaje(r.mensaje, "warning")
+                    }
+                }).fail(function (r) {
+                    mostrarMensaje(r.mensaje, "danger")
+                }).always(function () {
+                    pantallaCarga();
+                });
+            }
+        });
+    });
+
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin !== 0) return null;
+        } else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+
+    //convertir img en check
+    $(".img-check").click(function() {
+        $(this).toggleClass("check");
+    });
+
+    var colorTheme = "";
+    $(".color").click(function (e) {
+        $(".color").removeClass("active");
+        $(this).addClass("active");
+
+        colorTheme = $(this).attr("data-color");
+    });
+
+
+    $("#guardarColor").click(function (e) {
+        pantallaCarga();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("EditharTheme", "Admin")",
+            data: { color: colorTheme }
+        }).done(function (r) {
+            if (r.resultado === 0) {
+                location.reload();
+                mostrarMensaje(r.mensaje, "success")
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "danger")
+        }).always(function () {
+            pantallaCarga();
+        });
+        e.preventDefault();
+
+    });
+
+    var cookieFlickr = getCookie("OAuthToken");
+    if (cookieFlickr === null) {
+        $('.controlAlbum').prop('disabled', 'disabled').attr({
+            "title": "necesitas estar logueada con Flickr"
+        });
+        $('.cookieControl').prop('disabled', 'disabled').attr({
+            "title": "necesitas estar logueada con Flickr"
+        });
+
+    } else {
+        $('#mensajeControlFlickr').html('Ya estas loggueada en Flickr.');
+    }
+
+    //mensajes!
+    function mostrarMensaje(mensaje, type) {
+        $.notify({
+            // options
+            autoHide: false,
+            message: mensaje
+        }, {
+            // settings
+            type: type,
+            z_index: 5000,
+            mouse_over: 'pause'
+        });
+    }
+
+
+    function agregarInputs(contenedor) {
+        var MaxInputs = 100; //Número Maximo de Campos
+        //var contenedor = $("#formAdd"); //ID del contenedor
+        var AddButton = $("#agregarCampo"); //ID del Botón Agregar
+
+        //var x = número de campos existentes en el contenedor
+        var x = contenedor.find("div").length + 1;
+        var FieldCount = x - 1; //para el seguimiento de los campos
+
+        if (x <= MaxInputs) //max input box allowed
+        {
+            FieldCount++;
+            //agregar campo
+            contenedor.append( '<div>' +
+                                    '<input type="text" name="srcFotos" id="campo_' + FieldCount + '" placeholder="SRC Foto ' + FieldCount + '"/>' +
+                                    '<a href="#" class="eliminar-input btn btn-xs btn-danger"> Borrar <i class="fa fa-trash" aria-hidden="true"></i></a>' +
+                                '</div>'
+                                );
+            x++; //text box increment
+        }
+    }
+
+    function borrarFotos() {
+        pantallaCarga();
+        var elementos = $(".img-check.check");
+        if (elementos.length < 0) {
+            alert('Selecciona almenos alguna foto');
+        }
+        var ids = "";
+        $.each(elementos, function(i, v) {
+            ids += $(v).attr("data-imagenID") + ",";
+        });
+        ids = ids.slice(0, ids.length - 1);
+        var data = {
+            borrar: ids
+        };
+        $('#carga').show('slow');
+        $('#go').hide('fast');
+        $.ajax({
+            url:"@Url.Action("BorrarFotosJSonResult ", "Portfolio")",
+            data: data
+        }).done(function (data) {
+            if (data.resultado == 0) {
+                mostrarMensaje(data.mensaje, 'success');
+                elementos.parent().remove();
+            } else {
+                mostrarMensaje(data.mensaje, 'danger');
+            }
+            console.log(data);
+        }).fail(function (data) {
+            mostrarMensaje(data.mensaje, 'danger');
+            console.log(data);
+        }).always(function (data) {
+            pantallaCarga();
+        });
+
+    };
+
+    function borrarAlbum(event,id) {
+        pantallaCarga();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Borrar", "Portfolio")",
+            data: {id : id}
+        }).done(function (r) {
+            if (r.resultado === 0) {
+                mostrarMensaje(r.mensaje, "success")
+                $("#tr_" + id).remove();
+            } else {
+                mostrarMensaje(r.mensaje, "warning")
+            }
+        }).fail(function (r) {
+            mostrarMensaje(r.mensaje, "danger")
+        }).always(function () {
+            pantallaCarga();
+        });
+
+        event.preventDefault();
+    }
+</script>    
+    
+
+}

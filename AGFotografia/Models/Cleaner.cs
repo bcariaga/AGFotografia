@@ -21,7 +21,7 @@ namespace AGFotografia.Models
             {
                 string textoLimpio = ""; //se crea el string vacio que va a contener el nuevo string limpio 
 
-                bool validacion = textoALimpiar.StartsWith("http"); //se consulta si viene directamente el src
+                bool validacion = textoALimpiar.StartsWith("http") || textoALimpiar.StartsWith("HTTP"); //se consulta si viene directamente el src (click derecho --> copiar dirección de imagen)
 
                 if (validacion == true)
                 {
@@ -50,7 +50,7 @@ namespace AGFotografia.Models
                     }
                 }
 
-                    return textoLimpio;
+                return textoLimpio.ToLower();
             }
             #endregion
         }

@@ -34,24 +34,37 @@ namespace AGFotografia.Models
 
             consulta.Parameters.AddWithValue("@id_album ", id_album);
 
-            consulta.Connection = conexion;
-
-            DataTable tabla = new DataTable();
-
-            SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
-
-            adaptador.Fill(tabla);
-
-            foreach(DataRow fila in tabla.Rows)
+            try
             {
-                Foto foto = new Foto();
-                foto.ID = (int)fila["ID"];
-                foto.SRC = (string)fila["SRC"];
-                //foto.Miniatura = String.IsNullOrEmpty((string)fila["Miniatura"]) ? "" : (string)fila["Miniatura"];
-                foto.Miniatura = fila["Miniatura"] == DBNull.Value ? String.Empty : (string)fila["Miniatura"];
-                foto.ID_Album = (int)fila["ID_Album"];
+                consulta.Connection = conexion;
 
-                fotos.Add(foto);
+                DataTable tabla = new DataTable();
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta);
+
+                adaptador.Fill(tabla);
+
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    Foto foto = new Foto();
+                    foto.ID = (int)fila["ID"];
+                    foto.SRC = (string)fila["SRC"];
+                    //foto.Miniatura = String.IsNullOrEmpty((string)fila["Miniatura"]) ? "" : (string)fila["Miniatura"];
+                    foto.Miniatura = fila["Miniatura"] == DBNull.Value ? String.Empty : (string)fila["Miniatura"];
+                    foto.ID_Album = (int)fila["ID_Album"];
+
+                    fotos.Add(foto);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally {
+
+                conexion.Close();
 
             }
 

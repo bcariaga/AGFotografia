@@ -2,32 +2,36 @@
     ViewBag.Title = "Inicio";
 }
 
+
+
 <div class="right-content" style="opacity: 1;">
     <!--  HOME PAGE  -->
     <!--  SLIDER  -->
     <div class="flexslider home-page">
-        <ul class="slides">
-            @foreach (AGFotografia.Models.Portada portada in ViewBag.Portadas)
+            <ul class="slides">
+                @foreach (AGFotografia.Models.Portada portada in ViewBag.Portadas)
             {
-                <li class="images-bg flex-active-slide">
-                    <!--  SLIDER IMAGE  -->
-                    <img src="@portada.SRC" alt="" draggable="false" style="display: none;">
-                    <!--  //SLIDER IMAGE  -->
-                    <!--  CIRCLE  -->
-                    <div class="circle">
-                        <div class="home-title left">
-                            <span>
-                                @portada.Texto
-                            </span>
+                    <li class="images-bg">
+                        <!--  SLIDER IMAGE  -->
+                        <img src="@portada.SRC" alt="AG Fotografia Portada @portada.ID" draggable="false">
+                        <!--  //SLIDER IMAGE  -->
+                        <!--  CIRCLE  -->
+                        <div class="circle">
+                            <div class="home-title left">
+                                <span>
+                                    @portada.Texto
+                                </span>
+                            </div>
+
+                            <a class="button-down fa fa-angle-down" href="#"></a>
                         </div>
-                        <a class="button-down glyph fa fa-angle-down" href=""></a>
-                    </div>
-                    <!--  //CIRCLE  -->
-                </li>
 
-            }
+                        <!--  //CIRCLE  -->
+                    </li>
 
-        </ul>
+                }
+
+            </ul>
         <ol class="flex-control-nav flex-control-paging">
             <li><a class="flex-active">1</a></li>
             <li><a class="">2</a></li>
@@ -49,7 +53,7 @@
         <div id="threeColumn" class="portfolio column main-block">
             <div class="scroller">
                 <ul class="animate posi">
-                        @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
+                        @foreach (AGFotografia.Models.AlbumFill album in ViewBag.Albunes)
                         {
                             <li data-ng-class="@album.Tags" class="albunes-respon" @*style="width: 540px; height: 405px;"*@>
                                 <a href="../Portfolio/Ver?id=@album.ID" style="background-image: url(@album.Portada);"></a>
@@ -69,3 +73,70 @@
 </div>
 
 <!--  //PORTFOLIO  -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.images-bg').each(function () {
+
+                $(this).css({
+                    'background-image': 'url(' + $('img', this).css({ "display": "none" }).attr('src') + ')',
+                    'height': $(document).height(),
+                    'width': $(document).width()
+                });
+            });
+
+            $('.flexslider').flexslider({
+                slideshowSpeed: 5000,
+                animationLoop: true,
+                slideshow: true,
+                start: function (slide) {
+                    var pepe = $(this);
+
+                    var img = $(slide).find("img");
+                    img.each(function (index, element) {
+                        var height = img[index].naturalHeight;
+                        var width = img[index].naturalWidth;
+
+                        var li = $(slide).find(".slides li")[index];
+                        if (height > width) {
+                            //es portrait
+                            /*resposnive*/
+                            if ($(window).width() <= 640) {
+                                
+                                $(li).css({
+                                    "margin": "auto",
+                                    "width": $(window).width(),
+                                    "float": "none"
+                                });
+                            } else {
+                                $(li).css({
+                                    "margin": "auto",
+                                    "width": $(window).width() / 2,
+                                    "float": "none"
+                                });
+                            }
+                        }
+                    });
+                },
+                after: function (slider) {
+                    var next = $('.flex-active-slide', slider).find('.home-title');
+                    var className = '';
+                    if (next.hasClass('left')) {
+                        className = 'bounceInLeft';
+                    } else if (next.hasClass('top')) {
+                        className = 'flipInX';
+                    } else if (next.hasClass('zoom')) {
+                        className = 'bounceIn';
+                    }
+                    next.addClass(className + ' animated');
+                    next.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                        next.removeClass(className + ' animated');
+                    });
+                },
+            });
+        });
+    </script>
+    
+}

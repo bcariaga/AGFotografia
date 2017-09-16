@@ -1,95 +1,110 @@
-.green.white .main-navi > div.active div:first-child,
-.green.white .main-navi > div.active, 
-.green.white .main-navi a.active
-.green .tags-contents a.active,
-.green .blog-navi a:hover:before,
-.green .filter > a.active,
-.green .flex-direction-nav .flex-next:hover,
-.green .flex-direction-nav .flex-prev:hover,
-.green .details-close:hover,
-.green .button-close:hover,
-.green .blog-info a:before,
-.green input[type="submit"]:hover,
-.green .service-details .dots:before,
-.green .service-details .dots:after,
-.green .service-details .dots,
-.green .portfolio.horizontal li:hover a,
-.green .masonry-wrapper .item span.class,
-.green .portfolio-image li span.class,
-.green .right-images li span.class,
-.green .portfolio.column li span.class,
-.green .button-down,
-.green .home-page.flexslider .slides > li:before,
-.green .main-navi > div:hover .dot,
-.green .main-navi a:hover .dot,
-.green .main-navi > div.active div:first-child,
-.green .main-navi a.active:hover,
-.green .main-navi a.active{
+.white .main-navi > div.active div:first-child,
+.white .main-navi > div.active, 
+.white .main-navi a.active
+ .tags-contents a.active,
+ .blog-navi a:hover:before,
+ .filter > a.active,
+ .flex-direction-nav .flex-next:hover,
+ .flex-direction-nav .flex-prev:hover,
+ .details-close:hover,
+ .button-close:hover,
+ .blog-info a:before,
+ input[type="submit"]:hover,
+ .service-details .dots:before,
+ .service-details .dots:after,
+ .service-details .dots,
+ .portfolio.horizontal li:hover a,
+ .masonry-wrapper .item span.class,
+ .portfolio-image li span.class,
+ .right-images li span.class,
+ .portfolio.column li span.class,
+ .button-down,
+ .home-page.flexslider .slides > li:before,
+ .main-navi > div:hover .dot,
+ .main-navi a:hover .dot,
+ .main-navi > div.active div:first-child,
+ .main-navi a.active:hover,
+ .main-navi a.active{
 	background: #7ab014;
 }
-.green .masonry-wrapper .item em:before, 
-.green .right-images li em:before, 
-.green .portfolio.column li em:before,
-.green.white .soc-icons a:hover,
-.green .service-details .glyph,
-.green .blog-mini a:hover,
-.green .blog-navi a:hover,
-.green .search .glyph:hover,
-.green .skill .amount,
-.green .twitter-block .name,
-.green .twitter-block .glyph,
-.green .comments .reply:hover,
-.green .comments .user-name:hover,
-.green .var2.soc-icons a:hover,
-.green .show-more:hover,
-.green .blog-info .glyph,
-.green .blog-info a:hover,
-.green .blog-details a:hover,
-.green .member-details .soc-icons a:hover,
-.green .member-block:hover h2,
-.green .info-block em,
-.green textarea:focus,
-.green input[type="text"]:focus,
-.green input[type="text"].error,
-.green .soc-icons a:hover,
-.green .logo em:before{
+ .masonry-wrapper .item em:before, 
+ .right-images li em:before, 
+ .portfolio.column li em:before,
+.white .soc-icons a:hover,
+ .service-details .glyph,
+ .blog-mini a:hover,
+ .blog-navi a:hover,
+ .search .glyph:hover,
+ .skill .amount,
+ .twitter-block .name,
+ .twitter-block .glyph,
+ .comments .reply:hover,
+ .comments .user-name:hover,
+ .var2.soc-icons a:hover,
+ .show-more:hover,
+ .blog-info .glyph,
+ .blog-info a:hover,
+ .blog-details a:hover,
+ .member-details .soc-icons a:hover,
+ .member-block:hover h2,
+ .info-block em,
+ textarea:focus,
+ input[type="text"]:focus,
+ input[type="text"].error,
+ .soc-icons a:hover,
+ .logo em:before{
 	color: #7ab014;
 }
 
-.green .main-navi > div.active .corner,
-.green .main-navi a.active .corner{
+ .main-navi > div.active .corner,
+ .main-navi a.active .corner{
 	border-left-color: #7ab014;
 }
-.green .masonry-wrapper .item em:after,
-.green .right-images li em:after,
-.green .portfolio.column li em:after{
+ .masonry-wrapper .item em:after,
+ .right-images li em:after,
+ .portfolio.column li em:after{
 	border-right-color: #7ab014;
 }
-.green .tags-contents a.active,
-.green .features-contents a:before,
-.green .skill .line,
-.green .filter > a.active,
-.green .show-more:hover,
-.green textarea:focus,
-.green input[type="text"]:focus,
-.green input[type="text"].error,
-.green .service .button:hover,
-.green .masonry-wrapper .item:hover > span,
-.green .right-images li:hover > span,
-.green .portfolio.column ul li:hover > span,
-.green .masonry-wrapper .item.unactive > span,
-.green .portfolio.column ul li.unactive > span,
-.green .masonry-wrapper .item > span,
-.green .right-images li > span,
-.green .portfolio.column li > span,
-.green .circle:before{
+ .tags-contents a.active,
+ .features-contents a:before,
+ .skill .line,
+ .filter > a.active,
+ .show-more:hover,
+ textarea:focus,
+ input[type="text"]:focus,
+ input[type="text"].error,
+ .service .button:hover,
+ .masonry-wrapper .item:hover > span,
+ .right-images li:hover > span,
+ .portfolio.column ul li:hover > span,
+ .masonry-wrapper .item.unactive > span,
+ .portfolio.column ul li.unactive > span,
+ .masonry-wrapper .item > span,
+ .right-images li > span,
+ .portfolio.column li > span,
+ .circle:before{
 	border-color: #7ab014;
 }
-.green .flex-control-paging li a:hover,
-.green .flex-control-paging li a.flex-active{
+ .flex-control-paging li a:hover,
+ .flex-control-paging li a.flex-active{
 	box-shadow: 0 0 0 9px #7ab014 inset;
 }
-.white.green .flex-control-paging li a:hover, 
-.white.green .flex-control-paging li a.flex-active{
+.white .flex-control-paging li a:hover, 
+.white .flex-control-paging li a.flex-active{
 	box-shadow: 0 0 0 5px #7ab014 inset;
+}
+
+.masonry-wrapper .item:hover a,
+	.right-images li:hover a,
+	.portfolio.column li:hover a{
+		box-shadow: inset 0 0 0 4px #7ab014;
+}
+
+
+.logo {
+	color: #7ab014;
+}
+
+.logo:hover {
+	color: #7ab014;
 }

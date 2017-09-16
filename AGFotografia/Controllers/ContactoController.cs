@@ -35,24 +35,5 @@ namespace AGFotografia.Controllers
             
         }
 
-        [ValidateInput(false)]
-        public ActionResult Editar(FormCollection formulario)
-        {
-            DatosContacto datosEditados = new DatosContacto();
-            datosEditados.Email = formulario["email"];
-            datosEditados.Tel = formulario["tel"];
-            datosEditados.Facebook = formulario["facebook"];
-            datosEditados.Flickr = formulario["flickr"];
-            datosEditados.Texto1 = formulario["texto1"];
-            datosEditados.Texto2 = formulario["texto2"];
-            datosEditados.Portada = formulario["portada"];
-            datosEditados.Titulo = formulario["titulo"];
-            datosEditados.Subtitulo = formulario["subtitulo"];
-
-            DatosContactoManager edicion = new DatosContactoManager();
-            edicion.Editar(datosEditados);
-
-            return RedirectToAction("Contacto", "Contacto");
-        }
     }
 }

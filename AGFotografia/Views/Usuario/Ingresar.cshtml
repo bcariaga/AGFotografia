@@ -1,33 +1,73 @@
 ﻿
 @{
-    ViewBag.Title = "Admin";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Aldana Gonzalez Fotografia" />
+    <title>@ViewBag.Title - Aldana Gonzalez</title>
+    @Styles.Render("~/Content/Bootstrap")
+    <style>
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+    </style>
+ 
+</head>
+<body>
+    @if (ViewBag.Mensaje != null)
+    {
 
-<div class="right-content">
-  
+        <div class="bg-danger">
+            <h1>@ViewBag.Menssaje </h1>
+        </div>
+    }
 
-    @if (Session["usuario"] != null)
-    {    <div class="col-sm-3">
-        <h2>Crear Usuario</h2>
-        <form method="post" action="@Url.Action("CrearUser","Usuario")">
-            <input class="form-group" type="text" placeholder="User" name="usuario" />
-            <input class="form-group" type="password" placeholder="Pass" name="password1" />
-            <input class="form-group" type="password" placeholder="Pass" name="password2" />
-            <input class="form-group" type="submit" />
+    @if (Session["Admin"] != null)
+    {
+        @*<div class="col-sm-3">
+            <h2> ya hay un usuario logueado.</h2>
+            <a href="@Url.Action("Logout","Usuario")">Logout</a>
+        </div>*@
+
+        <form class="form-signin">
+            <h2 class="form-signin-heading">Ya hay un usuario logueado.</h2>
+            <a class="btn btn-lg btn-primary btn-block" href="@Url.Action("Logout","Usuario")">Logout</a>
         </form>
-    </div>
     }
     else
-    {  <div class="col-sm-3">
-        <h2>Ingresar</h2>
-        <form method="post" action="@Url.Action("Login", "Usuario")">
-            <input class="contacto" type="text" placeholder="User" name="usuario" />
-            <input class="contacto" type="password" placeholder="Pass" name="password" />
-            <input class="form-group" type="submit" />
-        </form>
-    </div>
+    {
+        @*<div class="col-sm-3">
+            <h2>Ingresar</h2>
+            <form method="post" action="@Url.Action("Login", "Usuario")">
+                <input class="contacto" type="text" placeholder="User" name="usuario" />
+                <input class="contacto" type="password" placeholder="Pass" name="password" />
+                <input class="form-group" type="submit" />
+            </form>
+        </div>*@
+        <div class="container">
 
+            <form class="form-signin" method="post" action="@Url.Action("Login", "Usuario")">
+                <h2 class="form-signin-heading">Ingreso</h2>
+
+                <label for="inputEmail" class="sr-only">Usuario</label>
+                <input type="text" id="inputEmail" class="form-control" placeholder="User" name="usuario" required="required" autofocus="">
+                <label for="inputPassword" class="sr-only">Pass</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Pass" name="password" required="">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+            </form>
+
+        </div>
     }
 
+    
 
-</div>
+</body>
+</html>

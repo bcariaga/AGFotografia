@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Aldana Gonzalez Fotografia" />
+    <meta name="description" content="Muestra de fotografias artisticas, de producto, retratos y más.Entra y conoce mi trabajo." />
+    <meta name="keywords" content="Fotografias fotografia fotos argentina fotografo capital federal" />
+    <meta name="robots" content="index,follow" />
+    <title>@ViewBag.Title - Aldana Gonzalez</title>
+    @Styles.Render("~/Content/landing")
+    <style>
+        .bgimg-1 {
+            position: relative;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("../../Content/img/C1.jpg"); /*TODO hacerlo dinamico*/
+            height: 100%;
+            -webkit-filter: blur(5px);
+            filter: blur(5px);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="bgimg-1"></div>
+    <div class="caption">
+        <span class="border" id="marca">Aldana Gonz</span>
+        <br />
+        <span class="border">Espera un momento...</span>
+        <br />
+        <img class="border" src="~/Content/img/default.svg" alt="cargando...">
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var timeOut = window.setTimeout(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/Index",
+                    success: function (response) {
+                        window.clearTimeout(timeOut);
+                        window.location = "/Home/Index?ping=true";                       
+                    }
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

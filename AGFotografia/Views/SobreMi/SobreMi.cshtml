@@ -3,15 +3,13 @@
     ViewBag.Title = "Sobre Mi";
     AGFotografia.Models.SobreMi sobreMi = ViewBag.SobreMi;
 }
-@if (Session["usuario"] == null)
-{
     <!--  ABOUT  -->
     <div class="right-content" style="opacity: 1;">
         <div class="about main-block">
             <div class="left-content col-lg-9">
                 <div class="scroller">
                     <!--  CONTENT IMAGE  -->
-                    <img src="@sobreMi.Portada" class="portada" />
+                    @*<img src="@sobreMi.Portada" class="portada" />*@
                     <!--  //CONTENT IMAGE  -->
                     <article class="left-content-text">
                         <h2>@sobreMi.Titulo</h2>
@@ -54,9 +52,7 @@
         </div>
     </div>
 
-}else
-{
-    <!--  ABOUT  -->
+    @*<!--  ABOUT  -->
     <div class="right-content" style="opacity: 1;">
         <div class="about main-block">
             <div class="left-content col-lg-9">
@@ -136,30 +132,5 @@
                         </article>
                     </form>
                 </div>
-                @*<div class="scroller__track">
-                    <div class="scroller__bar" style="height: 646px; top: 67.8161px;"></div>
-                </div>*@
-            </div>
-            <!--  RIGHT IMAGES  -->
-            @*<div class="right-images col-lg-3" data-baron-v="inited">
-                <div class="scroller" style="width: 410px;">
-                    <ul>
-                        @foreach (AGFotografia.Models.Album album in ViewBag.Albunes)
-                        {
-                            <li style="height: 307px; width: 410px;">
-                                <a href=""><img src="@album.Portada" alt=""></a>
-                                <span><em></em></span>
-                            </li>
-                        }
-
-                    </ul>
-                </div>
-                <div class="scroller__track">
-                    <div class="scroller__bar" style="height: 941px; top: 0px;"></div>
-                </div>
-            </div>*@
-            <!--  //RIGHT IMAGES  -->
-        </div>
-    </div>
-
-}
+               
+}*@
